@@ -1,4 +1,4 @@
-import VJSX from '../../../../src/vjsx'
+import VJSX from '../vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
@@ -63,4 +63,4 @@ const Example = ({pr1=0, children})=>{
 	// return self element
 	return self	
 }
-export { Example }
+export default Example

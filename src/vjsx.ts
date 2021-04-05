@@ -32,6 +32,23 @@ const disableInnerSetter = (elem: ElementWithCustomProps) =>{
 const generateTagName = (name: string): string =>
 name.replace(/[A-Z]/g,'-$&').substring(1).toLowerCase()
 
+const processChild = (element: Element, child: any) =>{
+	if(child instanceof Function) {
+		element.append('')
+		
+		const self: Text = element.childNodes[element.childNodes.length-1]
+		disableInnerSetter(element)
+		const setter = v =>{
+			self.data=v.toString()
+		}
+		const result = child(setter, element)
+		result && setter(result)
+	}else if(child instanceof Array){
+		for(const v of child){
+			processChild(element, v)
+		}
+	}else element.append(child)
+}
 
 const render = (component: string | Function | any, props: jsxProps, ...children: [Element|string|Function|[Element|string]]|[]): ElementWithCustomProps =>{
 	props ?? (props = {})
@@ -73,26 +90,7 @@ const render = (component: string | Function | any, props: jsxProps, ...children
 			
 		}
 	}
-	
-	for(const child of children){
-		if(child instanceof Function) {
-			element.append('')
-			
-			const self: Text = element.childNodes[element.childNodes.length-1]
-			disableInnerSetter(element)
-			const setter = v =>{
-				self.data=v.toString()
-			}
-			const result = child(setter, element)
-			result && setter(result)
-		}else if(child instanceof Array){
-
-			child.forEach(v=>{
-				element.append(v)
-			})
-		}else element.append(child)
-
-	}
+	processChild(element, children)
 	
 	return element;
 }
@@ -103,27 +101,10 @@ const VJSX = {
 }
 
 export default VJSX
-export { useAttr }
 
 /*
-const definedElements: Array<Element> = []
+merge string items if there are continuous string items
 
-const constructorCopy = Element.prototype.constructor
-
-Element.prototype.constructor = function(){
-	this.attributeChangedCallback = (name, oldValue, newValue)=>{
-		this[name] = newValue
-	}
-	constructorCopy();
-}
-Element.prototype.defineAttr = function(attrName: string, descriptor:defineAttrOptions){
-	if(!descriptor.set || !descriptor.get) throw new Error('setter or getter not stated')
-	Object.defineProperty(this, attrName, {
-		set:descriptor.set,
-		get:descriptor.get
-	})
-}*/
-/*
 	const childList = []
 	let strComp = []
 	let previousChildWasString = false;
@@ -157,23 +138,4 @@ Element.prototype.defineAttr = function(attrName: string, descriptor:defineAttrO
 	}
 	let childIndex=0
 
-	for(const child of childList){
-		if(child instanceof Element) element.appendChild(child)
-		else if(child instanceof Array) {
-			let text = ''
-
-			child.forEach((v,i)=>{
-				if(v instanceof Function) {
-					const setter = value =>{}
-					v(setter)
-				}else{
-
-				}
-			})
-			element.append(text)
-		}
-		else if(typeof child === 'object')
-
-		childIndex++
-	}
 	*/

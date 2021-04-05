@@ -26,8 +26,8 @@ const elem1 = document.createElement('div')
 elem1.append('hi!')
 elem1.id = 'elem1'
 ```
-
-When you load VanillaJSX library,
+---
+#### When you load VanillaJSX library,
 - `on` method, a shorthand of `addEventListener` 
 is available on all the objects which provide 'addEventListener'.
 - `useAttr` method is defined on all HTML Elements
@@ -99,6 +99,7 @@ const Example = ({pr1=0, children})=>{
   return self	
 }
 ```
+
 ## Roadmap
 
 - [x] VanillaJSX processor
@@ -107,6 +108,3 @@ const Example = ({pr1=0, children})=>{
   - it generates 
     - pre-rendered HTML
     - JS files which initializes the components
-
-## What I want you to know
-- I am a noob to Typescript lol
