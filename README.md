@@ -1,17 +1,17 @@
 # VanillaJSX
 
 ### Just a pure Javascript with JSX syntax.
-####⚠️Caution
+#### ⚠️Caution⚠️
 - This is still in Draft phase!
 ### Features
-- Component based!
+- Component Based Developing!
 - JSX syntax!
 - NO complex framework!
 - NO virtual DOMs!
 - No Re-rendering by its framework, easier for developers to understand the behavior
 - Less Learning Difficulty than React
 - Just use your JS skills!
-- If you want to change DOM attributes, JUST SET VALUE BY YOURSELF
+- If you want to change DOM attributes or texts, JUST SET THEM BY YOURSELF!
 - TS support
 
 ---
@@ -39,7 +39,7 @@ You can code using function component, or using CustomElement
 
 #### Code Example
 ```jsx
-import VJSX from '../../vjsxlib/vjsx'
+import VJSX from 'vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
@@ -62,11 +62,6 @@ const Example = ({pr1=0, children})=>{
   //------
   
   //define setters and getters
-  
-  /*
-  below is shorthand of
-  Object.defineProperties(self, {...})
-  */
   self.useAttr({
     pr1: {
       get(){
@@ -106,5 +101,12 @@ const Example = ({pr1=0, children})=>{
 ```
 ## Roadmap
 
-- [x] dynamic JSX processor
+- [x] VanillaJSX processor
+  - it dynamically appends components
 - [ ] SSG builder
+  - it generates 
+    - pre-rendered HTML
+    - JS files which initializes the components
+
+## What I want you to know
+- I am a noob to Typescript lol

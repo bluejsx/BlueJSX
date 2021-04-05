@@ -1,6 +1,6 @@
 import './style.css'
-import VJSX from './vjsxlib/vjsx'
-import { Example } from './src/components/Example'
+import VJSX from '../../../src/vjsx'
+import { Example } from './components/Example'
 
 /*
 When you load VanillaJSX library,

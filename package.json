@@ -2,7 +2,7 @@
   "name": "vjsx-dev",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite examples/example1",
     "build": "vite build",
     "serve": "vite preview"
   },

@@ -1,4 +1,4 @@
-import VJSX from '../../vjsxlib/vjsx'
+import VJSX from '../../../../src/vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
