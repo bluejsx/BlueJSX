@@ -1,0 +1,64 @@
+//---defult style-------
+custom-progress{
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 350px;
+  height: 10px;
+  border-width:2px;
+  border-style: solid;
+  background: gray;
+  border-color: gray;
+  display: inline-block;
+  &.indeterminate{
+    background: yellow;
+    &::part(bar){
+      width: 0;
+    }
+  }
+  &::part(bar){
+    height: 100%;
+    background-color: blue;
+  }
+}
+
+//---example of customized style below --------
+
+//  /* 👈 delete the double-slash ( // ) to see the default styling
+
+custom-progress{
+  //the bar-container field
+  background: linear-gradient(#373738, #b1b1b1);
+  border-radius: 8px;
+  border-color: gray;
+  //the inside moving bar
+  &::part(bar){
+    background: linear-gradient(#fff9, #00fff4);
+    border-radius: 7px;
+    transition: width 0.1s ease-in-out;
+  }
+  //when the progress bar doesn't have 'value'
+  &.indeterminate{
+    background-size: 35px 20px;
+    background-image:
+	    linear-gradient(45deg, 
+        transparent 33%, 
+        rgba(0, 0, 0, .2) 33%, 
+	      rgba(0,0, 0, .2) 66%, 
+        transparent 66% ),
+      linear-gradient(#373738, #b1b1b1);
+    animation: animate-stripes 5s linear infinite;
+    &::part(bar){
+      opacity: 0;
+    }
+  }
+  //when the progress is done
+  &.complete{
+   &::part(bar) {
+      filter: drop-shadow(0 0 0.5rem #83ffff);
+    }
+  }
+}
+@keyframes animate-stripes {
+  100% { background-position: -100px 0px; }
+}
+// */
