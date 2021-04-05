@@ -1,4 +1,4 @@
-import VJSX, { useAttr } from '../../vjsxlib/vjsx'
+import VJSX from '../../vjsxlib/vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
@@ -25,8 +25,6 @@ const Example = ({pr1=0, children})=>{
   /*
   below is shorthand of
   Object.defineProperties(self, {...})
-
-	(well, should I just provide useAttrs( elem, attrObj ) instead of defining it in Element.prototype?)
 
   */
 	self.useAttr({

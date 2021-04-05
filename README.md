@@ -1,7 +1,8 @@
 # VanillaJSX
----
-### Just a pure Javascript with JSX syntax.
 
+### Just a pure Javascript with JSX syntax.
+####⚠️Caution
+- This is still in Draft phase!
 ### Features
 - Component based!
 - JSX syntax!
@@ -15,6 +16,16 @@
 
 ---
 ### How the Coding Works
+When you code this:
+```jsx
+const elem1 = <div id='elem1'>hi!</div>
+```
+This will work as:
+```js
+const elem1 = document.createElement('div')
+elem1.append('hi!')
+elem1.id = 'elem1'
+```
 
 When you load VanillaJSX library,
 - `on` method, a shorthand of `addEventListener` 
@@ -24,7 +35,7 @@ is available on all the objects which provide 'addEventListener'.
   - This is a shorthand of [Object.defineProperties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties)
   - this makes you able to define [Setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)/[Getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) on your elements.
 
-When you code a component, you can code using function component, or pure javascript way (CustomElements).
+You can code using function component, or using CustomElement
 
 #### Code Example
 ```jsx
@@ -55,9 +66,6 @@ const Example = ({pr1=0, children})=>{
   /*
   below is shorthand of
   Object.defineProperties(self, {...})
-
-  (well, should I just provide useAttrs( elem, attrObj ) instead of defining it in Element.prototype?)
-
   */
   self.useAttr({
     pr1: {
@@ -84,8 +92,8 @@ const Example = ({pr1=0, children})=>{
     /*
       below just looks assigning a value to a property,
       however this is running getter/setter method.
-      So when you change `self.pr1` value, 
-    'pr1change' event is dispatched to 'self' element.
+      So when you change 'self.pr1' value, 
+      'pr1change' event is dispatched to 'self' element.
     */
     if(self.pr1<100) self.pr1+=10
     else self.pr1 = 0
@@ -96,6 +104,7 @@ const Example = ({pr1=0, children})=>{
   return self	
 }
 ```
+## Roadmap
 
-
-
+- [x] dynamic JSX processor
+- [ ] SSG builder
