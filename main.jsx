@@ -1,6 +1,6 @@
 import './style.css'
 import VJSX from './vjsxlib/vjsx'
-import { Test3 } from './src/components/Test3'
+import { Example } from './src/components/Example'
 
 /*
 When you load VanillaJSX library,
@@ -15,5 +15,5 @@ is available on all the objects which provides 'addEventListener'.
 */
 
 document.querySelector('#app').appendChild(<div>
-	<Test3 /> <br />
+	<Example /> <br />
 </div>)

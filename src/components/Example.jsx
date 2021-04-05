@@ -2,7 +2,7 @@ import VJSX, { useAttr } from '../../vjsxlib/vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Test3 = ({pr1=0, children})=>{
+const Example = ({pr1=0, children})=>{
 
 	//declare elements
 	const progress = <CustomProgress min='0' max='100' value={pr1}/>
@@ -65,4 +65,4 @@ const Test3 = ({pr1=0, children})=>{
 	// return self element
 	return self	
 }
-export { Test3 }
+export { Example }
