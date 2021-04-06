@@ -122,7 +122,7 @@ const Example = ({pr1=0, children})=>{
 ---
 
 ### Result of the code above
-<div></div>
+<div id='example-result-space'></div>
 
 - see how changing one value affects other multiple values using CustomEvents
 

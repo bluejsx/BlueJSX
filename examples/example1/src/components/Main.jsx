@@ -18,18 +18,21 @@ marked.setOptions({
     return hljs.highlightAuto(code, [lang]).value
   }
 })
-const Main = () =>(<div class={main}>
+const Main = () =>{
+  const container = (<div class='container'>
+    {
+      marked(article).split('<hr>').map(htmStr=>(
+        <section innerHTML={htmStr} class='markdown-body'/>
+      ))
+    }
+  </div>)
+  container.querySelector('#example-result-space').appendChild(<Example />)
+  const self = <div class={main}>
     <Header />
-    <div class='container'>
-      {
-        marked(article).split('<hr>').map((htmStr,i)=>{
-          const s = <section innerHTML={htmStr} class='markdown-body'/>
-          if(i===4) s.children[1].appendChild(<Example />)
-          return s
-        })
-      }
-    </div>
+    {container}
   </div>
-)
+  return self
+}
+
 
 export default Main

@@ -5,7 +5,7 @@
     "dev": "vite examples/example1",
     "build:example": "vite build examples/example1",
     "deploy:example": "gh-pages -d examples/example1/dist",
-    "build&deploy:expl": "npm run build:example && npm run deploy:example",
+    "buildDeploy:expl": "npm run build:example && npm run deploy:example",
     "build": "vite build",
     "serve": "vite preview"
   },
