@@ -1,0 +1,42 @@
+.container {
+  padding-top: var(--header-hight);
+  position: absolute;
+  width: 100vw;
+  height: calc(100vh - 50px);
+  scroll-snap-type: y mandatory;
+  overflow: auto;
+  font-size: 125%;
+  text-align: left;
+  section {
+    width: calc( 100vw - 200px);
+    height: calc(100vh - 200px);
+    padding: 100px;
+    scroll-snap-align: start;
+    color: white;
+    > * {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: 0.5em;
+    }
+    h1 {
+      font-size: xxx-large;
+    }
+    pre {
+      background-color: rgb(39, 39, 39);
+    }
+    a {
+      color: #2be677;
+    }
+    .bottom {
+      top: auto;
+      bottom: 0;
+      position: absolute;
+      margin-left: 150px;
+    }
+    .center {
+      text-align: center;
+    }
+  }
+}

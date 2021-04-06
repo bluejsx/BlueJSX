@@ -35,7 +35,7 @@ is available on all the objects which provide 'addEventListener'.
   - This is a shorthand of [Object.defineProperties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties)
   - this makes you able to define [Setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)/[Getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) on your elements.
 
-You can code using function component, or using CustomElement
+You can code using function component, or using [CustomElement](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_custom_elements)
 
 #### Code Example
 ```jsx
