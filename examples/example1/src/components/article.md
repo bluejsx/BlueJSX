@@ -8,7 +8,7 @@ Code with pure Javascript, components, and JSX!
 </div>
 
 
-<div class='bottom' style='color: #a01232; font-size: larger;'>
+<div class='boxed' style='color: #a01232; font-size: larger;'>
 
 ### ⚠️Caution⚠️
 - This is still in Draft phase!
@@ -119,10 +119,8 @@ const Example = ({pr1=0, children})=>{
 ```
 ---
 
----
-
 ### Result of the code above
-<div id='example-result-space'></div>
+<div id='example-result-space' class='boxed'></div>
 
 - see how changing one value affects other multiple values using CustomEvents
 
