@@ -104,6 +104,8 @@ const Example = ({pr1=0, children})=>{
 
 - [x] VanillaJSX processor
   - it dynamically appends components
+- [ ] make Typescript code suggestion work
+  - maybe making VSCode Extension might be a solution
 - [ ] SSG builder
   - it generates 
     - pre-rendered HTML

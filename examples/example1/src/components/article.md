@@ -1,6 +1,6 @@
 <div class='center'>
 
-# welcome to VanillaJSX!
+# Welcome to VanillaJSX!
 
 ### Just a pure Javascript with JSX syntax.
 
@@ -8,7 +8,7 @@ Code with pure Javascript, components, and JSX!
 </div>
 
 
-<div class='bottom'>
+<div class='bottom' style='color: #a01232; font-size: larger;'>
 
 ### ⚠️Caution⚠️
 - This is still in Draft phase!
@@ -122,14 +122,16 @@ const Example = ({pr1=0, children})=>{
 ---
 
 ### Result of the code above
+<div></div>
 
-
----
+- see how changing one value affects other multiple values using CustomEvents
 
 ## Roadmap
 
 - [x] VanillaJSX processor
   - it dynamically appends components
+- [ ] make Typescript code suggestion work
+  - maybe making VSCode Extension might be a solution
 - [ ] SSG builder
   - it generates 
     - pre-rendered HTML

@@ -24,7 +24,7 @@ const Main = () =>(<div class={main}>
       {
         marked(article).split('<hr>').map((htmStr,i)=>{
           const s = <section innerHTML={htmStr} class='markdown-body'/>
-          if(i===4) s.appendChild(<Example />)
+          if(i===4) s.children[1].appendChild(<Example />)
           return s
         })
       }
