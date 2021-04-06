@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite examples/example1",
+    "build:example": "vite build examples/example1",
+    "deploy:example": "gh-pages -d examples/example1/dist",
     "build": "vite build",
     "serve": "vite preview"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "sass": "^1.32.8",
     "vite": "^2.1.5"
   },
