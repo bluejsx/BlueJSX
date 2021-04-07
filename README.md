@@ -121,3 +121,4 @@ esbuild: {
   - it generates 
     - pre-rendered HTML
     - JS files which initializes the components
+  - [ViteJS SSG loader](https://vitejs.dev/guide/ssr.html#ssr-specific-plugin-logic)

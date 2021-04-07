@@ -16,27 +16,29 @@
   &.hidden {
     transform: translateX(var(--popup-width));
     #backfield {
-      visibility: hidden;
-      //background-color: #00000088;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease-out;
     }
   }
   #backfield {
     position: fixed;
-    top: 0px;
+    pointer-events: initial;
+    top: var(--header-hight);
     left: 0px;
-    visibility: visible;
+    opacity: 1;
     z-index: -1;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - var(--header-hight));
     background-color: #00000088;
+    transition: opacity 0.2s ease-out;
   }
-  a {
-    text-decoration-line: none;
-  }
+
   p {
     padding: 1em;
     color: darkcyan;
     transition: 0.2s ease-out;
+    cursor: pointer;
     &:hover {
       background-color: cadetblue;
       color: black;
