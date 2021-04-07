@@ -1,14 +1,34 @@
 {
-  "name": "vjsx-dev",
-  "version": "0.0.0",
+  "name": "vjsx",
+  "description": "VanillaJSX - pure javascript with JSX syntax",
   "scripts": {
     "dev": "vite examples/example1",
+    "build": "vite build",
     "build:example": "vite build examples/example1",
     "deploy:example": "gh-pages -d examples/example1/dist",
     "buildDeploy:expl": "npm run build:example && npm run deploy:example",
-    "build": "vite build",
+    
     "serve": "vite preview"
   },
+  "version": "0.0.0",
+  "main": "./src/vjsx.ts",
+  "browser": "./dist/vjsx.es.js",
+  "files": [
+    "src/",
+    "lib/",
+    "dist/"
+  ],
+  "keywords": [
+    "jsx",
+    "vanillajs",
+    "frontend"
+  ],
+  "tags": [
+    "jsx",
+    "vanillajs",
+    "frontend"
+  ],
+  
   "devDependencies": {
     "gh-pages": "^3.1.0",
     "sass": "^1.32.8",

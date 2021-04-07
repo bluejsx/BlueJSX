@@ -1,0 +1,46 @@
+:root{
+  --popup-width: 300px;
+  @media (max-width: 600px) {
+    --popup-width: 100vw
+  }
+}
+.menu_list {
+  position: fixed;
+  right: 0px;
+  width: var(--popup-width);
+  height: 100vh;
+  font-size: 1.3rem;
+  z-index: 1000;
+  background-color: black;
+  transition: transform 0.2s ease-out;
+  &.hidden {
+    transform: translateX(var(--popup-width));
+    #backfield {
+      visibility: hidden;
+      //background-color: #00000088;
+    }
+  }
+  #backfield {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    visibility: visible;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000088;
+  }
+  a {
+    text-decoration-line: none;
+  }
+  p {
+    padding: 1em;
+    color: darkcyan;
+    transition: 0.2s ease-out;
+    &:hover {
+      background-color: cadetblue;
+      color: black;
+    }
+  }
+  
+}

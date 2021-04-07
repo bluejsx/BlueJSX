@@ -1,4 +1,4 @@
-import VJSX from '../vjsx'
+import './menu.scss'
 
 const contents = [
   ['View the Source Code of This Page', 'https://github.com/Momijiichigo/VanillaJSX-Draft/tree/master/examples/example1'],
@@ -6,11 +6,32 @@ const contents = [
   ['Join Discussions', 'https://github.com/Momijiichigo/VanillaJSX-Draft/discussions']
 ]
 const Menu = () =>{
-  self = <div class='hidden'>{
-    contents.map(v=>{
-      const link = <a href={v[1]}>{v[0]}</a>
-    })
+  let open = false
+  const backField = <div id='backfield'></div>
+  const self = <div class={'menu_list hidden'}>{
+    contents.map(v=>(<a href={v[1]}>
+      <p>{v[0]}</p>
+      </a>)
+    )
   }
+  {backField}
   </div>
-  
+  self.useAttr({
+    open:{
+      get(){
+        return open
+      },
+      set(v){
+        open = v;
+        if(v){
+          self.classList.remove('hidden')
+        }else{
+          self.classList.add('hidden')
+        }
+      }
+    }
+  })
+  backField.onclick = () => self.open = false
+  return self
 }
+export default Menu

@@ -1,4 +1,3 @@
-import VJSX from '../vjsx'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'github-markdown-css'

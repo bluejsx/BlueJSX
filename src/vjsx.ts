@@ -1,4 +1,4 @@
-
+import './@types/vjsx.d'
 
 EventTarget.prototype.on = EventTarget.prototype.addEventListener;
 
@@ -131,7 +131,7 @@ const processChild = (element: Element, child: any) =>{
 	if(child instanceof Function) {
 		element.append('')
 		
-		const self: Text = element.childNodes[element.childNodes.length-1]
+		const self = element.childNodes[element.childNodes.length-1] as Text
 		disableInnerSetter(element)
 		const setter = v =>{
 			self.data=v.toString()

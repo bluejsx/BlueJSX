@@ -1,3 +1,6 @@
+:root {
+  --page-padding-side: 10vw;
+}
 .container {
   padding-top: var(--header-hight);
   position: absolute;
@@ -8,8 +11,8 @@
   font-size: 125%;
   text-align: left;
   section {
-    width: calc( 100vw - 200px);
-    padding: 5em;
+    width: calc( 100vw - 2 * var(--page-padding-side));
+    padding: var(--page-padding-side);
     scroll-snap-align: start;
     color: white;
     overflow: hidden;

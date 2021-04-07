@@ -99,6 +99,17 @@ const Example = ({pr1=0, children})=>{
   return self	
 }
 ```
+# Development
+- I use [vitejs](https://vitejs.dev/) for building / testing library and example codes.
+vite settings:
+```js
+esbuild: {
+  jsxFactory: 'VJSX.r',
+  jsxFragment: 'VJSX.Fragment',
+  jsxInject: `import VJSX from 'vjsx'`
+},
+```
+
 
 ## Roadmap
 

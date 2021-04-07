@@ -117,12 +117,13 @@ const Example = ({pr1=0, children})=>{
   return self	
 }
 ```
----
 
 ### Result of the code above
 <div id='example-result-space' class='boxed'></div>
 
 - see how changing one value affects other multiple values using CustomEvents
+
+---
 
 ## Roadmap
 

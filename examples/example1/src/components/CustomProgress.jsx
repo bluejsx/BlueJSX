@@ -1,5 +1,3 @@
-
-import VJSX from '../../../../src/vjsx'
 import './CustomProgress.scss'
 class CustomProgress extends HTMLElement{
   #max = 1
