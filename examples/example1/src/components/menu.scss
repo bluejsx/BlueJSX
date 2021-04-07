@@ -39,6 +39,8 @@
     color: darkcyan;
     transition: 0.2s ease-out;
     cursor: pointer;
+    border-bottom: 1px darkcyan double;
+    margin: 0px;
     &:hover {
       background-color: cadetblue;
       color: black;

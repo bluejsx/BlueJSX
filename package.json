@@ -7,7 +7,6 @@
     "build:example": "vite build examples/example1",
     "deploy:example": "gh-pages -d examples/example1/dist",
     "buildDeploy:expl": "npm run build:example && npm run deploy:example",
-    
     "serve": "vite preview"
   },
   "version": "0.0.0",
@@ -28,15 +27,12 @@
     "vanillajs",
     "frontend"
   ],
-  
   "devDependencies": {
     "gh-pages": "^3.1.0",
-    "sass": "^1.32.8",
-    "vite": "^2.1.5"
-  },
-  "dependencies": {
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.7.2",
-    "marked": "^2.0.1"
+    "marked": "^2.0.1",
+    "sass": "^1.32.8",
+    "vite": "^2.1.5"
   }
 }
