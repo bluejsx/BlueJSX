@@ -31,6 +31,9 @@
     
     a {
       color: #2be677;
+      ::after {
+        content: '↗︎';
+      }
     }
     .bottom {
       top: auto;
