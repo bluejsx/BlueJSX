@@ -14,3 +14,6 @@ interface defineAttrsOptions {
 interface ElementWithCustomProps extends Element{
   [key: string]: any
 }
+declare namespace JSX {
+  type Element = ElementWithCustomProps;
+}
