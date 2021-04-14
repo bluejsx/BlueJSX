@@ -16,4 +16,3 @@ const Test = (): HTMLDivElement =>{
 
 }
 const t = <Test />
-t.unko

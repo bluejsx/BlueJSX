@@ -1,3 +1,6 @@
+/**
+ * @type {import('vite').UserConfig}
+ */
 const path = require('path')
 export default {
   esbuild: {

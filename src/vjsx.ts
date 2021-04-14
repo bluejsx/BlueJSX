@@ -1,4 +1,5 @@
-import './@types/vjsx.d'
+import { defineAttrsOptions, ElementWithCustomProps, jsxProps, AdditionalElementProps } from './@types/vjsx.d';
+import { SVG_TAG_NAMES } from './data'
 
 EventTarget.prototype.on = EventTarget.prototype.addEventListener;
 
@@ -10,107 +11,7 @@ Element.prototype.ready = function(func: Function){
 Element.prototype.useAttr = function(descriptor: defineAttrsOptions){
 	Object.defineProperties(this, descriptor)
 }
-const useAttr = (elem: Element, descriptor: defineAttrsOptions) => {
-	Object.defineProperties(elem, descriptor)
-}
 
-const SVG_TAG_NAMES = [
-  'altGlyph',
-  'altGlyphDef',
-  'altGlyphItem',
-  'animate',
-  'animateColor',
-  'animateMotion',
-  'animateTransform',
-  'animation',
-  'audio',
-  'canvas',
-  'circle',
-  'clipPath',
-  'color-profile',
-  'cursor',
-  'defs',
-  'desc',
-  'discard',
-  'ellipse',
-  'feBlend',
-  'feColorMatrix',
-  'feComponentTransfer',
-  'feComposite',
-  'feConvolveMatrix',
-  'feDiffuseLighting',
-  'feDisplacementMap',
-  'feDistantLight',
-  'feDropShadow',
-  'feFlood',
-  'feFuncA',
-  'feFuncB',
-  'feFuncG',
-  'feFuncR',
-  'feGaussianBlur',
-  'feImage',
-  'feMerge',
-  'feMergeNode',
-  'feMorphology',
-  'feOffset',
-  'fePointLight',
-  'feSpecularLighting',
-  'feSpotLight',
-  'feTile',
-  'feTurbulence',
-  'filter',
-  'font',
-  'font-face',
-  'font-face-format',
-  'font-face-name',
-  'font-face-src',
-  'font-face-uri',
-  'foreignObject',
-  'g',
-  'glyph',
-  'glyphRef',
-  'handler',
-  'hkern',
-  'iframe',
-  'image',
-  'line',
-  'linearGradient',
-  'listener',
-  'marker',
-  'mask',
-  'metadata',
-  'missing-glyph',
-  'mpath',
-  'path',
-  'pattern',
-  'polygon',
-  'polyline',
-  'prefetch',
-  'radialGradient',
-  'rect',
-  'script',
-  'set',
-  'solidColor',
-  'stop',
-  'style',
-  'svg',
-  'switch',
-  'symbol',
-  'tbreak',
-  'text',
-  'textArea',
-  'textPath',
-  'title',
-  'tref',
-  'tspan',
-  'unknown',
-  'use',
-  'video',
-  'view',
-  'vkern'
-]
-//createElement shortcut
-const crt: (tagName: string, options?: ElementCreationOptions)=>Element = document.createElement.bind(document);
 
 const disableInnerSetter = (elem: ElementWithCustomProps) =>{
 	
@@ -145,12 +46,21 @@ const processChild = (element: Element, child: any) =>{
 	}else element.append(child)
 }
 
-const render = (component: string | Function | any, props: jsxProps, ...children: [Element|string|Function|[Element|string]]|[]): ElementWithCustomProps =>{
+
+type HTMLTagName = keyof HTMLElementTagNameMap
+type SVGTagName = keyof SVGElementTagNameMap
+type JSXChildren = [ Element | string | Function | JSXChildren ] | []
+
+function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
+function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
+function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
+function render (component: HTMLTagName | SVGTagName | Function | any, props: jsxProps, ...children: JSXChildren){
 	props ?? (props = {})
-	let element: ElementWithCustomProps;
+	let element: Element;
+
 	if(typeof component === 'string'){
 		if(SVG_TAG_NAMES.includes(component)){
-			element = document.createElementNS('http://www.w3.org/2000/svg',component)
+			element = document.createElementNS('http://www.w3.org/2000/svg', component)
 		}else {
 			element = document.createElement(component)
 		}
@@ -177,7 +87,6 @@ const render = (component: string | Function | any, props: jsxProps, ...children
 	if(props){
 		for(const key in props){
 			const prop = props[key]
-			let func
 			if(key==='class') element.classList.value = prop
 			else{
 				if(element instanceof SVGElement){
