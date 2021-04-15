@@ -18,7 +18,7 @@ interface AdditionalElementProps {
 
 declare namespace JSX {
   //type Element = ReturnType<typeof VJSX.r>;
-  type Element = HTMLElement
+  type Element = HTMLElement | SVGElement
   //interface Element extends HTMLElement {}
   type IntrinsicElements = HTMLElementTagNameMap & SVGElementTagNameMap
 }

@@ -71,7 +71,6 @@ const SVG_TAG_NAMES = [
   'prefetch',
   'radialGradient',
   'rect',
-  'script',
   'set',
   'solidColor',
   'stop',
