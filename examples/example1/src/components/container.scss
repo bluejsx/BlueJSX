@@ -2,11 +2,11 @@
   --page-padding-side: 10vw;
 }
 .container {
-  padding-top: var(--header-hight);
+  margin-top: var(--header-hight);
   position: absolute;
   width: 100vw;
   height: calc(100vh - 50px);
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   overflow: auto;
   font-size: 125%;
   text-align: left;
@@ -16,6 +16,11 @@
     scroll-snap-align: start;
     color: white;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    &:nth-child(1){
+      height: calc(100vh - 120px);
+    }
     h1 {
       font-size: xxx-large;
     }
@@ -42,6 +47,7 @@
     }
     .center {
       text-align: center;
+      flex: 1;
     }
     .boxed {
       padding: 2em;

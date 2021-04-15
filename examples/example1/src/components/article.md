@@ -131,6 +131,7 @@ const Example = ({pr1=0, children})=>{
   - it dynamically appends components
 - [ ] make Typescript code suggestion work
   - maybe making VSCode Extension might be a solution
+- [ ] Vite.js HMR Plugin
 - [ ] SSG builder
   - it generates 
     - pre-rendered HTML

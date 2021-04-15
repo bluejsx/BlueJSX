@@ -9,15 +9,6 @@ header {
   font-size: calc( var(--header-hight) * 0.66);
   background-color: black;
   z-index: 10000;
-  .menu-btn {
-    height: var(--header-hight);
-    right: 0px;
-    top: 0;
-    position: fixed;
-    width: var(--header-hight);
-    background-color: blue;
-    cursor: pointer;
-  }
   .title {
     top: 0;
     bottom: 0;
