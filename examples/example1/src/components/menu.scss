@@ -4,11 +4,12 @@
     --popup-width: 100vw
   }
 }
-.menu_list {
+.menu_list_container {
   position: fixed;
   font-size: 1.3rem;
   .menu-list {
     position: fixed;
+    top: var(--header-hight);
     right: 0px;
     width: var(--popup-width);
     height: 100vh;

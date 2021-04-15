@@ -6,7 +6,6 @@ import { main } from './Main.module.scss'
 import './container.scss'
 
 import Example from './Example'
-import Header from './Header'
 //import Container from './Container'
 import article from './article.md?raw'
 
@@ -27,7 +26,6 @@ const Main = () =>{
   </div>)
   container.querySelector('#example-result-space').appendChild(<Example />)
   const self = <div class={main}>
-    <Header />
     {container}
   </div>
   return self

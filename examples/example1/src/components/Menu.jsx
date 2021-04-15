@@ -12,7 +12,7 @@ const Menu = () =>{
     <span></span>
   </div>)
   const backField = <div id='backfield'></div>
-  const self = (<div class='menu_list hidden'>
+  const self = (<div class='menu_list_container hidden'>
     {toggleButton}
     <div class='menu-list'>{
       contents.map(v=>{

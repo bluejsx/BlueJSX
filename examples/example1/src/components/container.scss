@@ -5,9 +5,9 @@
   margin-top: var(--header-hight);
   position: absolute;
   width: 100vw;
-  height: calc(100vh - 50px);
+  height: 100vh;
   scroll-snap-type: y proximity;
-  overflow: auto;
+  overflow: scroll;
   font-size: 125%;
   text-align: left;
   section {
@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     &:nth-child(1){
-      height: calc(100vh - 120px);
+      height: calc(100vh - 2 * var(--page-padding-side))
     }
     h1 {
       font-size: xxx-large;

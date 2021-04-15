@@ -5,13 +5,14 @@ header {
   height: var(--header-hight);
   top:0px;
   left: 0px;
-  border-bottom: white 1px;
+  border-bottom: white 1px double;
   font-size: calc( var(--header-hight) * 0.66);
   background-color: black;
   z-index: 10000;
   .title {
     top: 0;
     bottom: 0;
+    height: 100%;
     margin: auto;
   }
 }

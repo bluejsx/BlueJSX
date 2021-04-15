@@ -5,11 +5,12 @@ body {
   background-color: rgb(113 98 65);;
   color: white;
   margin: 0px;
+  overflow: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #ddeeff;
+  color: white;
 }
