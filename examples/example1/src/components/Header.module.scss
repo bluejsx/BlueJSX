@@ -5,7 +5,7 @@ header {
   height: var(--header-hight);
   top:0px;
   left: 0px;
-  border-bottom: white 1px double;
+  border-bottom: white 1px solid;
   font-size: calc( var(--header-hight) * 0.66);
   background-color: black;
   z-index: 10000;
