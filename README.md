@@ -10,7 +10,7 @@
 - Component Based Developing!
 - JSX syntax!
 - NO complex framework!
-- NO virtual DOMs!
+- NO virtual DOMs! Just use your familiar HTML DOMs!
 - No Re-rendering by its framework, easier for developers to understand the behavior
 - Less Learning Difficulty than React
 - Just use your JS skills!
