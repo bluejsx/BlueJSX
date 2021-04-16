@@ -78,7 +78,6 @@ You can code using function component, or using [CustomElement](https://develope
 #### Code Example
 
 ```jsx
-import VJSX from 'vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
