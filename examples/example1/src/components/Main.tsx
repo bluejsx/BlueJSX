@@ -21,7 +21,7 @@ marked.setOptions({
 const Main = () =>{
   const container = (<div class='container'>
     {
-      marked(article).split('<hr>').map((htmStr: string)=>(
+      marked(article).split('<hr>').map(htmStr=>(
         <section innerHTML={htmStr} class='markdown-body' />
       ))
     }
