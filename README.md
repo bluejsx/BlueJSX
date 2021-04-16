@@ -109,7 +109,7 @@ vite settings:
 esbuild: {
   jsxFactory: 'VJSX.r',
   jsxFragment: 'VJSX.Fragment',
-  jsxInject: `import VJSX from 'vjsx'`
+  jsxInject: `import VJSX from '@momijiichigo/vjsx'`
 },
 ```
 
