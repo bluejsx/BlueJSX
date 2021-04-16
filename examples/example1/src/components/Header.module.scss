@@ -10,9 +10,13 @@ header {
   background-color: black;
   z-index: 10000;
   .title {
+    position: absolute;
     top: 0;
     bottom: 0;
-    height: 100%;
+    left: 0;
+    right: 0;
     margin: auto;
+    width: fit-content;
+    height: fit-content;
   }
 }
