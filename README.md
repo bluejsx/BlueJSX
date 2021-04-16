@@ -33,7 +33,7 @@ elem1.id = 'elem1'
 ## Usage
 ### Installation
 ```sh
-npm i @momijiichigo/vjsx@0.0.1
+npm i @momijiichigo/vjsx
 ```
 ### for [vitejs](https://vitejs.dev/)
 in your `vite.config.js`:
