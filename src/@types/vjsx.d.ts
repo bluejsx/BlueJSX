@@ -16,11 +16,17 @@ interface AdditionalElementProps {
 	[key: string]: any
 }
 
-declare namespace JSX {
-  //type Element = ReturnType<typeof VJSX.r>;
-  type Element = HTMLElement | SVGElement
-  //interface Element extends HTMLElement {}
-  type IntrinsicElements = HTMLElementTagNameMap & SVGElementTagNameMap
+declare global{
+  namespace JSX {
+    //type Element<T extends HTMLTagName> = HTMLElementTagNameMap[T];
+    type Element = HTMLElement
+    //interface Element extends HTMLElement {}
+    type IntrinsicElements = {
+      [key in keyof HTMLElementTagNameMap]:  HTMLElementTagNameMap[key] | {class: string, children?: any}
+    } & {
+      [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] | {class: string, children?: any}
+    }
+  }
 }
 
 /*

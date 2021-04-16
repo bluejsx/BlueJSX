@@ -1,3 +1,5 @@
+/* @jsx VJSX.r */
+import VJSX from 'vjsx'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'github-markdown-css'
@@ -12,15 +14,15 @@ import article from './article.md?raw'
 const {log} = console
 
 marked.setOptions({
-  highlight: function (code, lang) {
+  highlight: function (code: string, lang: string) {
     return hljs.highlightAuto(code, [lang]).value
   }
 })
 const Main = () =>{
   const container = (<div class='container'>
     {
-      marked(article).split('<hr>').map(htmStr=>(
-        <section innerHTML={htmStr} class='markdown-body'/>
+      marked(article).split('<hr>').map((htmStr: string)=>(
+        <section innerHTML={htmStr} class='markdown-body' />
       ))
     }
   </div>)

@@ -1,7 +1,7 @@
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({pr1=0, children})=>{
+const Example = ({pr1=0, children=null})=>{
 
 	//declare elements
 	const progress = <CustomProgress min='0' max='100' value={pr1}/>
