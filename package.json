@@ -1,7 +1,7 @@
 {
   "name": "@momijiichigo/vjsx",
   "description": "VanillaJSX - pure javascript with JSX syntax",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/Momijiichigo/VanillaJSX.git"
@@ -15,7 +15,7 @@
     "serve": "vite preview"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "./src/vjsx.ts",
   "files": [
