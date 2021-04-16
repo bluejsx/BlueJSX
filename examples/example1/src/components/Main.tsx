@@ -6,7 +6,6 @@ import { main } from './Main.module.scss'
 import './container.scss'
 
 import Example from './Example'
-//import Container from './Container'
 import article from './article.md?raw'
 
 const {log} = console
