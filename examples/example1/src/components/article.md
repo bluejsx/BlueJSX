@@ -62,6 +62,7 @@ export default {
 }
 ```
 Then your JSX code would be interpreted as VanillaJSX! Have fun!
+
 ---
 
 ### When you load VanillaJSX library,
