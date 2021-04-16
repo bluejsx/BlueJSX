@@ -44,12 +44,12 @@ elem1.id = 'elem1'
 
 ---
 
-### Usage
-#### Installation
+## Usage
+### Installation
 ```sh
 npm i @momijiichigo/vjsx@0.0.1
 ```
-#### for [vitejs](https://vitejs.dev/)
+### for [vitejs](https://vitejs.dev/)
 in your `vite.config.js`:
 ```js
 export default {
