@@ -1,9 +1,9 @@
 import './menu.scss'
 
 const contents = [
-  ['View the Source Code of This Page', 'https://github.com/Momijiichigo/VanillaJSX-Draft/tree/master/examples/example1'],
-  ['GitHub Repository', 'https://github.com/Momijiichigo/VanillaJSX-Draft/'],
-  ['Join Discussions', 'https://github.com/Momijiichigo/VanillaJSX-Draft/discussions']
+  ['View the Source Code of This Page', 'https://github.com/vanillajsx/VanillaJSX/tree/master/examples/example1'],
+  ['GitHub Repository', 'https://github.com/vanillajsx/VanillaJSX'],
+  ['Join Discussions', 'https://github.com/vanillajsx/VanillaJSX/discussions']
 ]
 const Menu = () =>{
   let open = false

@@ -1,10 +1,10 @@
 {
-  "name": "@momijiichigo/vjsx",
+  "name": "@vanillajsx/vjsx",
   "description": "VanillaJSX - pure javascript with JSX syntax",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Momijiichigo/VanillaJSX.git"
+    "url": "git://github.com/vanillajsx/VanillaJSX.git"
   },
   "scripts": {
     "dev": "vite examples/example1",
@@ -47,9 +47,9 @@
     "vite": "^2.1.5"
   },
   "bugs": {
-    "url": "https://github.com/Momijiichigo/VanillaJSX/issues"
+    "url": "https://github.com/vanillajsx/VanillaJSX/issues"
   },
-  "homepage": "https://momijiichigo.github.io/VanillaJSX/",
+  "homepage": "https://vanillajsx.github.io/",
   "directories": {
     "doc": "doc",
     "example": "examples",

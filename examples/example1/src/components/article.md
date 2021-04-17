@@ -18,7 +18,7 @@ Code with pure Javascript, components, and JSX!
 ---
 
 ### Features
-- Component Based Developing!
+- Component Based Development!
 - JSX syntax!
 - NO complex framework!
 - NO virtual DOMs! Just use your familiar HTML DOMs!
@@ -47,7 +47,7 @@ elem1.id = 'elem1'
 ## Usage
 ### Installation
 ```sh
-npm i @momijiichigo/vjsx
+npm i @vanillajsx/vjsx
 ```
 ### for [vitejs](https://vitejs.dev/)
 in your `vite.config.js`:
@@ -56,7 +56,7 @@ export default {
   esbuild: {
     jsxFactory: 'VJSX.r',
     jsxFragment: 'VJSX.Fragment',
-    jsxInject: `import VJSX from '@momijiichigo/vjsx'`
+    jsxInject: `import VJSX from '@vanillajsx/vjsx'`
   },
   //... other settings
 }
