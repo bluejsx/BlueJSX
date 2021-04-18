@@ -19,9 +19,7 @@ interface AdditionalElementProps {
 
 declare namespace VJSX{
   namespace JSX {
-    //type Element<T extends HTMLTagName> = HTMLElementTagNameMap[T];
     type Element = HTMLElement & AdditionalElementProps
-    //interface Element extends HTMLElement {}
     type IntrinsicElements = {
       [key in keyof HTMLElementTagNameMap]:  HTMLElementTagNameMap[key] | {class: string, children?: any}
     } & {
