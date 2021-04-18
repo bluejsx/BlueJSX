@@ -1,7 +1,7 @@
+import '@vanillajsx/vjsx'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import '../declaration.d'
-
 import 'github-markdown-css'
 import 'highlight.js/styles/vs2015.css'
 import { main } from './Main.module.scss'

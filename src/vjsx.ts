@@ -1,4 +1,5 @@
-import { defineAttrsOptions, ElementWithCustomProps, jsxProps, AdditionalElementProps } from './@types/vjsx.d';
+//import { defineAttrsOptions, ElementWithCustomProps, jsxProps, AdditionalElementProps, VJSX } from './@types/vjsx.d';
+import './@types/vjsx.d';
 import { SVG_TAG_NAMES } from './data'
 
 EventTarget.prototype.on = EventTarget.prototype.addEventListener;
@@ -34,7 +35,7 @@ const processChild = (element: Element, child: any) =>{
 		
 		const self = element.childNodes[element.childNodes.length-1] as Text
 		disableInnerSetter(element)
-		const setter = v =>{
+		const setter = (v: any) =>{
 			self.data=v.toString()
 		}
 		const result = child(setter, element)

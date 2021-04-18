@@ -1,5 +1,5 @@
-import VJSX from '../vjsx'
-type eventOn = (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions)=> void
+//import VJSX from '../vjsx'
+
 interface jsxProps {
   id?: string;
   class?: string;
@@ -12,11 +12,12 @@ interface ElementWithCustomProps extends Element{
   [key: string]: any
 }
 interface AdditionalElementProps {
-	useAttr: (descriptor: defineAttrsOptions)=> void
+	useAttr: (descriptor: defineAttrsOptions)=> void,
+  on: typeof EventTarget.prototype.addEventListener,
 	[key: string]: any
 }
 
-declare global{
+declare namespace VJSX{
   namespace JSX {
     //type Element<T extends HTMLTagName> = HTMLElementTagNameMap[T];
     type Element = HTMLElement & AdditionalElementProps
