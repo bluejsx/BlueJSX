@@ -10,8 +10,6 @@
     "dev": "vite examples/example1",
     "build": "vite build",
     "build:example": "vite build examples/example1",
-    "deploy:example": "gh-pages -d examples/example1/dist",
-    "buildDeploy:expl": "npm run build:example && npm run deploy:example",
     "serve": "vite preview"
   },
   "publishConfig": {
