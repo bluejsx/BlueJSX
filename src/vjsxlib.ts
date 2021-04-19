@@ -9,8 +9,7 @@ Object.defineProperties(Element.prototype, {
 			this._vf[name]?.push(listener) || (this._vf[name] = [listener])
 		}
 	}
-}
-)
+})
 
 
 function useAttr<Obj extends Element & AdditionalElementProps, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
