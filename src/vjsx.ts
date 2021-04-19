@@ -1,18 +1,14 @@
 //import { defineAttrsOptions, ElementWithCustomProps, jsxProps, AdditionalElementProps, VJSX } from './@types/vjsx.d';
 import './@types/vjsx.d';
 import { SVG_TAG_NAMES } from './data'
+import { useAttr } from './vjsxlib'
 
 EventTarget.prototype.on = EventTarget.prototype.addEventListener;
-
+/*
 Element.prototype.ready = function(func: Function){
 	func(this)
 }
-
-
-Element.prototype.useAttr = function(descriptor: defineAttrsOptions){
-	Object.defineProperties(this, descriptor)
-}
-
+*/
 
 const disableInnerSetter = (elem: ElementWithCustomProps) =>{
 	
@@ -114,6 +110,7 @@ const VJSX = {
 }
 
 export default VJSX
+export { useAttr }
 
 /*
 merge string items if there are continuous string items

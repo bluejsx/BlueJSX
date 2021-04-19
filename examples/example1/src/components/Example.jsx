@@ -1,64 +1,42 @@
+import { useAttr } from '@vanillajsx/vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({pr1=0, children=null})=>{
+const Example = ({progValue=0, children})=>{
 
 	//declare elements
-	const progress = <CustomProgress min='0' max='100' value={pr1}/>
+	const progress = <CustomProgress min='0' max='100' value={progValue}/>
 	const btn = <button>click</button>
 	const self = (
 		<div class='t3'>
 			{btn}
 			{progress} 
-      {(set, elem)=>{
-        elem.on('pr1change',e=>set(e.detail.value))
-        set(pr1)
-      }} %
+      {(set, elem)=>elem.watch('progValue',v=>set(v))} %
 			{children}
 		</div>
 	)
-  //------
-  
-	//define setters and getters
-  
-  /*
-  below is shorthand of
-  Object.defineProperties(self, {...})
 
+  /*
+  below defines a property named 'progValue',
+	and when 'progValue' changes, 
+	all registered listeners will be executed.
   */
-	self.useAttr({
-		pr1: {
-			get(){
-				return pr1
-			},
-			set(v){
-				pr1 = v
-				self.dispatchEvent(
-          new CustomEvent("pr1change", { 
-            detail: {
-              value: v
-            }
-          })
-        )
-			}
-		}
-	})
-  //-------
-  
+	useAttr(self, 'progValue', progValue)
+
 	// functionalities
-  self.on('pr1change',e=> progress.value = e.detail.value)
+	//when `self.progValue` changed, set `progress.value` to `self.progValue`
+  self.watch('progValue',v=> progress.value = v)
+
   btn.onclick = () =>{
     /*
       below just looks assigning a value to a property,
-    	however this is running getter/setter method.
-      So when you change `self.pr1` value, 
-    'pr1change' event is dispatched to 'self' element.
+    	however this is running getter/setter method,
+			which executes all registered listener functions via `watch` method.
     */
-    if(self.pr1<100) self.pr1+=10
-		else self.pr1 = 0
+    if(self.progValue<100) self.progValue+=10
+		else self.progValue = 0
   }
-  //-------
-  
+
 	// return self element
 	return self	
 }

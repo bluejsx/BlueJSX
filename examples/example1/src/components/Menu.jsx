@@ -1,3 +1,4 @@
+import { useAttr } from '@vanillajsx/vjsx'
 import './menu.scss'
 
 const contents = [
@@ -6,7 +7,6 @@ const contents = [
   ['Join Discussions', 'https://github.com/vanillajsx/VanillaJSX/discussions']
 ]
 const Menu = () =>{
-  let open = false
   const toggleButton = (<div id='h-menu-button'>
     <span></span>
     <span></span>
@@ -23,19 +23,12 @@ const Menu = () =>{
     }</div>
     {backField}
   </div>)
-  self.useAttr({
-    open:{
-      get(){
-        return open
-      },
-      set(v){
-        open = v;
-        if(v){
-          self.classList.remove('hidden')
-        }else{
-          self.classList.add('hidden')
-        }
-      }
+  useAttr(self, 'open', false)
+  self.watch('open', v=>{
+    if(v){
+      self.classList.remove('hidden')
+    }else{
+      self.classList.add('hidden')
     }
   })
   backField.onclick = () => self.open = false

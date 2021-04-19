@@ -54,72 +54,60 @@ Then your JSX code would be interpreted as VanillaJSX! Have fun!
 #### When you load VanillaJSX library,
 - `on` method, a shorthand of `addEventListener` 
 is available on all the objects which provide 'addEventListener'.
-- `useAttr` method is defined on all HTML Elements
-  - `useAttr` method sets custom attribute properties on your element.
-  - This is a shorthand of [Object.defineProperties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties)
-  - this makes you able to define [Setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)/[Getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) on your elements.
+#### VanillaJSX provides:
+- `useAttr(elem: Element, propName: string, defaultValue: any)` method:
+  - This sets custom property variable on your element.
+  - This makes you able to listen the value change using `watch` listener:
+  - `elem.watch(propName: string, newValue => void)`
+    - `watch` listener is similar to `addEventListener` 
+    - difference is that the listener function in `watch` recieves the new property value, not `Event` object.
+  - The code example below shows the usage of `useAttr` and `watch`.
 
 You can code using function component, or using [CustomElement](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_custom_elements)
 
 #### Code Example
 ```jsx
+import { useAttr } from '@vanillajsx/vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({pr1=0, children})=>{
+const Example = ({progValue=0, children})=>{
 
-  //declare elements
-  const progress = <CustomProgress min='0' max='100' value={pr1}/>
-  const btn = <button>click</button>
-  const self = (
-    <div class='t3'>
-      {btn}
-      {progress} 
-      {(set, elem)=>{
-        elem.on('pr1change',e=>set(e.detail.value))
-        set(pr1)
-      }} %
-      {children}
-    </div>
-  )
-  //------
-  
-  //define setters and getters
-  self.useAttr({
-    pr1: {
-      get(){
-        return pr1
-      },
-      set(v){
-        pr1 = v
-        self.dispatchEvent(
-          new CustomEvent("pr1change", { 
-            detail: {
-              value: v
-            }
-          })
-        )
-      }
-    }
-  })
-  //-------
-  
-  // functionalities
-  self.on('pr1change',e=> progress.value = e.detail.value)
+	//declare elements
+	const progress = <CustomProgress min='0' max='100' value={progValue}/>
+	const btn = <button>click</button>
+	const self = (
+		<div class='t3'>
+			{btn}
+			{progress} 
+      {(set, elem)=>elem.watch('progValue',v=>set(v))} %
+			{children}
+		</div>
+	)
+
+  /*
+  below defines a property named 'progValue',
+	and when 'progValue' changes, 
+	all registered listeners will be executed.
+  */
+	useAttr(self, 'progValue', progValue)
+
+	// functionalities
+	//when `self.progValue` changed, set `progress.value` to `self.progValue`
+  self.watch('progValue',v=> progress.value = v)
+
   btn.onclick = () =>{
     /*
       below just looks assigning a value to a property,
-      however this is running getter/setter method.
-      So when you change 'self.pr1' value, 
-      'pr1change' event is dispatched to 'self' element.
+    	however this is running getter/setter method,
+			which executes all registered listener functions via `watch` method.
     */
-    if(self.pr1<100) self.pr1+=10
-    else self.pr1 = 0
+    if(self.progValue<100) self.progValue+=10
+		else self.progValue = 0
   }
-  //-------
-  
-  // return self element
-  return self	
+
+	// return self element
+	return self	
 }
 ```
 
