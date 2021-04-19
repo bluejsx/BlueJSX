@@ -115,7 +115,7 @@ const Example = ({progValue=0, children})=>{
     /*
       below just looks assigning a value to a property,
       however this is running getter/setter method,
-      which executes all registered listener functions via `watch` method.
+      which executes all listener functions registered via `watch` method.
     */
     if(self.progValue<100) self.progValue+=10
     else self.progValue = 0
