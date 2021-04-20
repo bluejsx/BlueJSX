@@ -54,13 +54,20 @@ Then your JSX code would be interpreted as VanillaJSX! Have fun!
 #### When you load VanillaJSX library,
 - `on` method, a shorthand of `addEventListener` 
 is available on all the objects which provide 'addEventListener'.
+
 #### VanillaJSX provides:
-- `useAttr(elem: Element, propName: string, defaultValue: any)` method:
+- `useAttr` method:
+  ```ts
+  import { useAttr } from '@vanillajsx/vjsx'
+  useAttr(elem: Element, propName: string, defaultValue: any)
+  ```
   - This sets custom property variable on your element.
   - This makes you able to listen the value change using `watch` listener:
-  - `elem.watch(propName: string, newValue => void)`
+    ```ts
+    elem.watch(propName: string, (newValue) => void)
+    ```
     - `watch` listener is similar to `addEventListener` 
-    - difference is that the listener function in `watch` recieves the new property value, not `Event` object.
+    - The difference is that the listener function in `watch` recieves the new property value, not `Event` object.
   - The code example below shows the usage of `useAttr` and `watch`.
 
 You can code using function component, or using [CustomElement](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_custom_elements)
