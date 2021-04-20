@@ -2,7 +2,7 @@ import './@types/vjsx.d'
 
 Object.defineProperties(Element.prototype, {
 	_vf: {
-		value: {} as { [key: string]: Function[] & {value: any} }
+		value: {} as { [key: string]: Function[] & {value?: any} }
 	},
 	watch: {
 		value: function(name: string, listener: (value: any)=>void){
