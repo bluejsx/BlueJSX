@@ -1,38 +1,58 @@
+/*
+SSG compile flow
+
+HTML output direction:
+- first build the webpage with providing VJSX_SSG.r instead of VJSX.r
+- VJSX_SSG.r is almost same as VJSX.r
+- differences are that VJSX_SSG.r:
+	- writes data-vxf attribute to each elements from function components
+- after first build, simulate rendering the page using JSDOM
+- after rendering, output the innerHTML value of the root element
+- then merge them with template html file
+
+JS output direction:
+- look into the function component codes,
+- with excluding inner scope codes (scopes inside event listeners, etc)
+- then if parser finds innerText, innerHTML, setAttribute, classList, dataset, id, etc, 
+- delete them because it will be already rendered in HTML
+- look for the 'self' element of the component, replace it with a value comes from parameter
+- generate function analysis data in form of js object:
+import { ExportName } from 'path/to/file.js'
+{
+	'path/to/file.js#ExportName': {
+		comp: ExportName,
+		dependency: [36,]
+	},
+	'path/to/another/file.js#AAA': {
+		
+	}
+}
+- 
+*/
+
+
 const Base = ({children}) =><div>{children}</div>
 const Test3 = ({pr1,children})=>{
-	//value setters
-	let pr1Setter = () =>{}
-
-	//declare elements
-	const elem1 = <Base>aaa</Base>
-	const elem2 = <div>pr1:{s=>elem2.setValue=s}</div>
-	const p1 = <progress min='0' max='10'></progress>
+	let self;
+	const elem2 = <div>pr1:{s=>self.watch('pr1',v=>s(v))}</div>
+	const p1 = <progress max='10'></progress>
 	const b1 = <button>click</button>
-	const self =  (
-		<div>
-			{elem1}
+	self =  (
+		<Base>
+			{b1}
 			{elem2}
 			{p1}
-			{b1}
 			{children}
-		</div>
+		</Base>
 	)
-	//element attributes
-	self.defineAttrs({
-		pr1: {
-			get(){
-				return pr1
-			},
-			set(v){
-				pr1 = v
-				pr1Setter(v)
-			}
-		}
-	})
-	// functionalities
-	elem1.onmousehover = ()=>elem1.innerText+='a'
-	const setProgress = v => p1.value = v
-	b1.onclick = ()=>setProgress(p1.value+1)
+	//preserve
+	useAttr(self, 'pr1', pr1)
+	self.watch('pr1', v=>p1.value=v)
+	b1.onclick = ()=>{
+		self.pr1++;
+	}
+	//delete
+	
 	// return self element
 	return self	
 }
@@ -47,6 +67,13 @@ Object.prototype.getKey = function(value){
 	}
 	return null
 }*/
+a = {
+	'path/to/file#default':{
+		dependency: {
+			props: [pr1]
+		}
+	}
+}
 //////
 const COMP_NAME_MAP = {
 	'Xzt5Nm': Test3
