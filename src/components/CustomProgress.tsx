@@ -1,4 +1,4 @@
-import { vjsx } from '../vjsx'
+import VJSX from '../vjsx'
 import './CustomProgress.scss'
 class CustomProgress extends HTMLElement{
   #max = 1

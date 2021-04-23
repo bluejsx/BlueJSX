@@ -1,3 +1,4 @@
+/* @jsx VJSX.r */
 import VJSX from '../vjsx'
 
 const assertIsElement = (item: any) =>{
@@ -15,7 +16,7 @@ const disableInnerSetter = (elem: ElementWithCustomProps) =>{
 }
 
 const ElemList = ({ Type = 'div', children = [] }: jsxProps) => {
-	const container: ElementWithCustomProps = <Type>
+	const container = <Type>
 		{children}
 	</Type>
 	disableInnerSetter(container)
