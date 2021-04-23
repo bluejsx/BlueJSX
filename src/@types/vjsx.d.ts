@@ -23,7 +23,7 @@ declare namespace VJSX{
   namespace JSX {
     type Element = HTMLElement & AdditionalElementProps
     type IntrinsicElements = {
-      [key in keyof HTMLElementTagNameMap]:  HTMLElementTagNameMap[key] | {class: string, children?: any}
+      [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] | {class: string, children?: any}
     } & {
       [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] | {class: string, children?: any}
     }

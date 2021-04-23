@@ -3,8 +3,12 @@ import './@types/vjsx.d';
 import { SVG_TAG_NAMES } from './data'
 import { useAttr } from './vjsxlib'
 
-EventTarget.prototype.on = EventTarget.prototype.addEventListener;
+Object.defineProperty(EventTarget.prototype, 'on', {
+	value: EventTarget.prototype.addEventListener
+})
 /*
+EventTarget.prototype.on = EventTarget.prototype.addEventListener;
+
 Element.prototype.ready = function(func: Function){
 	func(this)
 }
