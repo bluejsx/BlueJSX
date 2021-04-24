@@ -33,11 +33,11 @@ import { ExportName } from 'path/to/file.js'
 
 const Base = ({children}) =><div>{children}</div>
 const Test3 = ({pr1,children})=>{
-	let self;
-	const elem2 = <div>pr1:{s=>self.watch('pr1',v=>s(v))}</div>
+	let textSetter;
+	const elem2 = <div>pr1:{s=>textSetter=s}</div>
 	const p1 = <progress max='10'></progress>
 	const b1 = <button>click</button>
-	self =  (
+	const self =  (
 		<Base>
 			{b1}
 			{elem2}
@@ -47,7 +47,10 @@ const Test3 = ({pr1,children})=>{
 	)
 	//preserve
 	useAttr(self, 'pr1', pr1)
-	self.watch('pr1', v=>p1.value=v)
+	self.watch('pr1', v=>{
+		p1.value=v
+		textSetter(v)
+	})
 	b1.onclick = ()=>{
 		self.pr1++;
 	}

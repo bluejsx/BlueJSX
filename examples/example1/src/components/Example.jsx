@@ -2,10 +2,10 @@ import { useAttr } from '@vanillajsx/vjsx'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({progValue=0, children})=>{
+const Example = ({progValue=0, children=null})=>{
 
 	//declare elements
-	const progress = <CustomProgress min='0' max='100' value={progValue}/>
+	const progress = <CustomProgress max='100' value={progValue}/>
 	const btn = <button>click</button>
 	const self = (
 		<div class='t3'>
