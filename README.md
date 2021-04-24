@@ -81,7 +81,7 @@ import { CustomProgress } from './CustomProgress'
 const Example = ({progValue=0, children})=>{
 
   //declare elements
-  const progress = <CustomProgress min='0' max='100' value={progValue}/>
+  const progress = <CustomProgress max='100' value={progValue}/>
   const btn = <button>click</button>
   const self = (
     <div class='t3'>
