@@ -21,7 +21,7 @@ interface AdditionalElementProps {
 
 type JSXElement = Element & AdditionalElementProps
 
-type textSetter = (setter: (v:any)=>void, element: JSXElement)=> void;
+type textSetter = (setter?: (v:any)=>void, element?: JSXElement)=> void;
 
 type HTMLTagName = keyof HTMLElementTagNameMap
 type SVGTagName = keyof SVGElementTagNameMap
