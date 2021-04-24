@@ -1,12 +1,23 @@
 import './@types/vjsx.d'
 
+const valueExists = (value: any): boolean =>{
+	if(value===0) return true
+	return !!value
+}
+
 Object.defineProperties(Element.prototype, {
 	_vf: {
 		value: {} as { [key: string]: Function[] & {value?: any} }
 	},
 	watch: {
 		value: function(name: string, listener: (value: any)=>void){
-			this._vf[name]?.push(listener) || (this._vf[name] = [listener])
+			const valueField = this._vf[name]
+			if(!valueField){
+				this._vf[name] = [listener]
+			}else{
+				valueField.push(listener)
+				if(valueExists(valueField.value)) listener(valueField.value)
+			}
 		}
 	}
 })

@@ -9,23 +9,31 @@ interface defineAttrsOptions {
   [key: string]: PropertyDescriptor
 }
 interface ElementWithCustomProps extends Element{
-  [key: string]: any
+  [key: PropertyKey]: any
 }
 
 interface AdditionalElementProps {
   on: typeof EventTarget.prototype.addEventListener,
   watch: (name: string, listener: (value: any)=>void) => void
   _vf: { [key: string]: Function[] & {value?: any} },
-	[key: string]: any
+	[key: PropertyKey]: any
 }
+
+type JSXElement = Element & AdditionalElementProps
+
+type textSetter = (setter: (v:any)=>void, element: JSXElement)=> void;
+
+type HTMLTagName = keyof HTMLElementTagNameMap
+type SVGTagName = keyof SVGElementTagNameMap
+type JSXChildren = [ JSXElement | string | textSetter | JSXChildren ] | []
 
 declare namespace VJSX{
   namespace JSX {
     type Element = HTMLElement & AdditionalElementProps
     type IntrinsicElements = {
-      [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] | {class: string, children?: any}
+      [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] | {class: string, children?: JSXChildren}
     } & {
-      [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] | {class: string, children?: any}
+      [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] | {class: string, children?: JSXChildren}
     }
   }
 }

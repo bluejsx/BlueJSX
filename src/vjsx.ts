@@ -38,8 +38,7 @@ const processChild = (element: Element, child: any) =>{
 		const setter = (v: any) =>{
 			self.data=v.toString()
 		}
-		const result = child(setter, element)
-		result && setter(result)
+		child(setter, element)
 	}else if(child instanceof Array){
 		for(const v of child){
 			processChild(element, v)
@@ -48,9 +47,6 @@ const processChild = (element: Element, child: any) =>{
 }
 
 
-type HTMLTagName = keyof HTMLElementTagNameMap
-type SVGTagName = keyof SVGElementTagNameMap
-type JSXChildren = [ Element | string | Function | JSXChildren ] | []
 
 function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
 function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
