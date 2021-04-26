@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "jsxFactory": "VJSX.r",
+    "jsxFragmentFactory": "VJSX.Fragment"
+  }
+}
