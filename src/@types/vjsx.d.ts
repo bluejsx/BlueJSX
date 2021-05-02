@@ -39,6 +39,10 @@ declare namespace VJSX{
 }
 
 /*
+type setterPrefix = 'set-'
+
+type S<E, key extends keyof E> = Record<`${setterPrefix}${key}`, (func: (v:E[key])=>void)=>void> 
+type ElementWithSetterAttr<E> = E | Record<`${setterPrefix}${keyof E}`, (func: (v:any)=>void)=>void> 
 interface useAttr{
   <PropName extends string, AttrType>(propName: PropName, defaultValue: AttrType): asserts this is AdditionalElementProps & Record<PropName, AttrType>
 }

@@ -53,11 +53,13 @@ function render<T extends SVGTagName>(component: T, props: jsxProps, ...children
 function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
 function render (component: HTMLTagName | SVGTagName | Function | any, props: jsxProps, ...children: JSXChildren){
   props ?? (props = {})
+  let isSVG = false
   let element: Element;
 
   if(typeof component === 'string'){
     if(SVG_TAG_NAMES.includes(component)){
       element = document.createElementNS('http://www.w3.org/2000/svg', component)
+      isSVG = true
     }else {
       element = document.createElement(component)
     }
@@ -85,15 +87,19 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
     for(const key in props){
       const prop = props[key]
       if(key==='class') element.classList.value = prop
+/*      else if(key.indexOf('set-')===0){
+        let setter: (value: any)=>void;
+        if(isSVG) setter = (value: any) => element.setAttribute(key.substring(4), value)
+        else setter = (value: any) => element[key.substring(4)] = value
+        prop(setter)
+      }
+*/
       else{
-        if(element instanceof SVGElement){
+        if(isSVG){
           element.setAttribute(key, prop)
         } else {
-          try{
-            element[key] = prop
-          }catch(e){
-            element.setAttribute(key, prop)
-          }
+          //let's see if there would be any problem with IDL attr
+          element[key] = prop
         }
       }
       
