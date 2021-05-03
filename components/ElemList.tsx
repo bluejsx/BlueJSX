@@ -56,4 +56,4 @@ const ElemList = ({ Type = 'div', children = [] }: jsxProps) => {
 	return self
 }
 
-export { ElemList }
+export default ElemList 

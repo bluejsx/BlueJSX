@@ -1,4 +1,4 @@
-import './CustomProgress.scss'
+import './ProgressBar.scss'
 class ProgressBar extends HTMLElement{
   #max = 1
   #value = null
@@ -55,4 +55,4 @@ class ProgressBar extends HTMLElement{
   }
 }
 customElements.define('progress-bar', ProgressBar)
-export { ProgressBar }
+export default ProgressBar 
