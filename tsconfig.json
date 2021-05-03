@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "ESNext",
     "lib": ["dom", "esnext"],
+    "target": "ESNext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,

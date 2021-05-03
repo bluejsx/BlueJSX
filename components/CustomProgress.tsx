@@ -1,9 +1,8 @@
-import VJSX from '../vjsx'
 import './CustomProgress.scss'
-class CustomProgress extends HTMLElement{
+class ProgressBar extends HTMLElement{
   #max = 1
   #value = null
-  #bar: HTMLDivElement
+  #bar: HTMLElement
   constructor(){
     super();
     this.#bar = <div part='bar'/>
@@ -16,7 +15,7 @@ class CustomProgress extends HTMLElement{
   connectedCallback(){
     this.render()
   }
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     switch(name){
       case 'max':
         this.#max = +newValue
@@ -55,5 +54,5 @@ class CustomProgress extends HTMLElement{
     this.setAttribute('max', max.toString())
   }
 }
-customElements.define('custom-progress',CustomProgress)
-export { CustomProgress }
+customElements.define('progress-bar', ProgressBar)
+export { ProgressBar }
