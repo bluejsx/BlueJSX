@@ -26,8 +26,13 @@ const disableInnerSetter = (elem: ElementWithCustomProps) =>{
   })
 }
 
-const generateTagName = (name: string): string =>
-name.replace(/[A-Z]/g,'-$&').substring(1).toLowerCase()
+let namelessCustomElementCount = 0
+const generateTagName = (name: string): string =>{
+  if(name==='default'){
+    return `custom-elem-${(namelessCustomElementCount++).toString(36)}`
+  }
+  return name.replace(/[A-Z]/g,'-$&').substring(1).toLowerCase()
+}
 
 const processChild = (element: Element, child: any) =>{
   if(child instanceof Function) {
@@ -94,13 +99,11 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
         prop(setter)
       }
 */
-      else{
-        if(isSVG){
-          element.setAttribute(key, prop)
-        } else {
-          //let's see if there would be any problem with IDL attr
-          element[key] = prop
-        }
+      else if(isSVG){
+        element.setAttribute(key, prop)
+      } else {
+        //let's see if there would be any problem with IDL attr
+        element[key] = prop
       }
       
     }
