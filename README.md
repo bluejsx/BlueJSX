@@ -26,12 +26,11 @@ const elem1 = <div id='elem1'>hi!</div>
 This will work as:
 ```js
 const elem1 = document.createElement('div')
-elem1.append('hi!')
 elem1.id = 'elem1'
+elem1.append('hi!')
 ```
 ---
-## Usage
-### Installation
+## Installation
 ```sh
 npm i @vanillajsx/vjsx
 ```
