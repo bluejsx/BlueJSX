@@ -51,7 +51,7 @@ Then your JSX code would be interpreted as VanillaJSX! Have fun!
 ---
 ## Documentation
 
-- see [documentation](https://github.com/vanillajsx/VanillaJSX/tree/master/doc)
+### see [documentation](https://github.com/vanillajsx/VanillaJSX/tree/master/doc)
 
 ## Roadmap
 
