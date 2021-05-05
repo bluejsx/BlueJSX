@@ -49,7 +49,7 @@ export default {
 Then your JSX code would be interpreted as VanillaJSX! Have fun!
 
 ---
-## Documentation
+## Usage
 
 ### see [documentation](https://github.com/vanillajsx/VanillaJSX/tree/master/doc)
 
