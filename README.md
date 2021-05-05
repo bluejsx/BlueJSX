@@ -49,73 +49,9 @@ export default {
 Then your JSX code would be interpreted as VanillaJSX! Have fun!
 
 ---
+## Documentation
 
-#### When you load VanillaJSX library,
-- `on` method, a shorthand of `addEventListener` 
-is available on all the objects which provide 'addEventListener'.
-
-#### VanillaJSX provides:
-- `useAttr` method:
-  ```ts
-  import { useAttr } from '@vanillajsx/vjsx'
-  useAttr(elem: Element, propName: string, defaultValue: any)
-  ```
-  - This sets custom property variable on your element.
-  - This makes you able to listen the value change using `watch` listener:
-    ```ts
-    elem.watch(propName: string, (newValue) => void)
-    ```
-    - `watch` listener is similar to `addEventListener` 
-    - The difference is that the listener function in `watch` recieves the new property value, not `Event` object.
-  - The code example below shows the usage of `useAttr` and `watch`.
-
-You can code using function component, or using [CustomElement](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_custom_elements)
-
-#### Code Example
-```jsx
-import { useAttr } from '@vanillajsx/vjsx'
-import { CustomProgress } from './CustomProgress'
-
-//takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({progValue=0, children})=>{
-
-  //declare elements
-  const progress = <CustomProgress max='100' value={progValue}/>
-  const btn = <button>click</button>
-  const self = (
-    <div class='t3'>
-      {btn}
-      {progress} 
-      {(set, elem)=>elem.watch('progValue',v=>set(v))} %
-      {children}
-    </div>
-  )
-
-  /*
-  below defines a property named 'progValue',
-  and when 'progValue' changes, 
-  all registered listeners will be executed.
-  */
-  useAttr(self, 'progValue', progValue)
-
-  // functionalities
-  //when `self.progValue` changed, set `progress.value` to `self.progValue`
-  self.watch('progValue',v=> progress.value = v)
-
-  btn.onclick = () =>{
-    /*
-      below just looks assigning a value to a property,
-      however this is running getter/setter method,
-      which executes all listener functions registered via `watch` method.
-    */
-    if(self.progValue<100) self.progValue+=10
-    else self.progValue = 0
-  }
-
-  // return self element
-  return self	
-}
-```
+- see [documentation](https://github.com/vanillajsx/VanillaJSX/tree/master/doc)
 
 ## Roadmap
 

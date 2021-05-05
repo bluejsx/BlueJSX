@@ -176,3 +176,14 @@ or
 ```jsx
 <CustomProgress />
 ```
+
+### Tips
+
+Since you load VanillaJSX in your javascript, `on` method, a shorthand of `addEventListener` is available on all the objects which provide `addEventListener` method (i.e. `EventTarget` objects).
+
+This can be simply implemented by the code below:
+
+```js
+EventTarget.prototype.on = EventTarget.prototype.addEventListener
+```
+
