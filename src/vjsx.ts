@@ -31,7 +31,7 @@ const generateTagName = (name: string): string =>{
   if(name==='default'){
     return `custom-elem-${(namelessCustomElementCount++).toString(36)}`
   }
-  return name.replace(/[A-Z]/g,'-$&').substring(1).toLowerCase()
+  return name.replace(/\B[A-Z]/g,'-$&').toLowerCase()
 }
 
 const processChild = (element: Element, child: any) =>{
