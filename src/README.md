@@ -3,14 +3,13 @@
 If you know a better way to organize the structure, please let me know!
 
 ```
-src
+./src
 ├── @types
 │   └── vjsx.d.ts
-├── components
-│   ├── CustomProgress.scss
-│   ├── CustomProgress.tsx
-│   └── ElemList.tsx
+├── README.md
+├── data.ts
+├── tsconfig.json
 ├── vjsx.ts
-└── vjsxUtils.ts
+└── vjsxlib.ts
 ```
 currently `vjsx.ts` is the file which provides JSX loader (`VJSX.r`)
