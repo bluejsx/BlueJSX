@@ -3,6 +3,7 @@
 interface jsxProps {
   id?: string;
   class?: string;
+  ref?: [object, string];
   [key: string]: any;
 }
 interface defineAttrsOptions {
@@ -31,9 +32,9 @@ declare namespace VJSX{
   namespace JSX {
     type Element = HTMLElement & AdditionalElementProps
     type IntrinsicElements = {
-      [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] | {class?: string, children?: JSXChildren}
+      [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] | {class?: string, children?: JSXChildren, ref?: [object, string]}
     } & {
-      [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] | {class?: string, children?: JSXChildren}
+      [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] | {class?: string, children?: JSXChildren, ref?: [object, string]}
     }
   }
 }

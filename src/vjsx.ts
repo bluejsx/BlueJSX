@@ -92,6 +92,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
     for(const key in props){
       const prop = props[key]
       if(key==='class') element.classList.value = prop
+      else if(key==='ref') prop[0][prop[1]] = element
 /*      else if(key.indexOf('set-')===0){
         let setter: (value: any)=>void;
         if(isSVG) setter = (value: any) => element.setAttribute(key.substring(4), value)
