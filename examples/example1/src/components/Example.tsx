@@ -7,7 +7,10 @@ const Example = ({progValue=0, children=null})=>{
   //declare elements
   //const progress = <CustomProgress max='100' value={progValue}/>
   //const btn = <button>click</button>
-  const refs = {}
+  const refs = {
+    btn: HTMLButtonElement.prototype,
+    progress: HTMLProgressElement.prototype
+  }
   const self = (
     <div class='t3'>
       <button ref={[refs, 'btn']}>click</button>
