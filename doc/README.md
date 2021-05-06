@@ -100,7 +100,64 @@ let count = 0
   count: {(set, element)=>element.onclick=()=>set(count++)}!!!
 </div>
 ```
+
 This element counts up the number of clicking of the element.
+
+### Ref Attribute
+
+You can avoid breaking down DOM trees using `ref` attribute. 
+Here is an example. By using `ref` attribute, you can replace the following code:
+```jsx
+const btn = <button>click</button>
+const progress = <progress max='10' value='0' />
+const self = (
+  <div>
+    {btn}
+    {progress}
+  </div>
+)
+btn.onclick = () => progress.value++
+```
+
+with:
+```jsx
+const refs = {}
+const self = (
+  <div>
+    <button ref={[refs, 'btn']}>click</button>
+    <progress ref={[refs, 'progress']} max='10' value='0' />
+  </div>
+)
+const { btn, progress } = refs
+btn.onclick = () => progress.value++
+```
+
+Here is the usage:
+
+First, make a new empty object:
+
+```js
+const refs = {}
+```
+
+Next, add `ref` attribute to your element, and set the following array:
+
+```jsx
+<button ref={[refs, 'btn']}>
+```
+
+After the Element declarations, add following code:
+
+```js
+const { btn } = ref
+```
+
+Great! You can now be able to use the button element with the `btn` variable. Don't forget, the value of `ref` attribute is:
+```ts
+[object, string]
+//[<object for reference passing>, <name of the element you prefer to use>]
+```
+
 
 ## Custom Element components
 
