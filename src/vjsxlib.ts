@@ -32,8 +32,9 @@ function useAttr<Obj extends Element & AdditionalElementProps, PropName extends 
       return target._vf[propName].value
     },
     set(value: AttrType){
-      target._vf[propName].value = value
-      target._vf[propName].forEach(func=>func(value))
+      const vf = target._vf[propName]
+      vf.value = value
+      for(let i=0;i<vf.length;i++) vf[i](value)  //target._vf[propName].forEach(func=>func(value))
     }
   })
   target[propName] = defaultValue
