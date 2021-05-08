@@ -26,15 +26,15 @@ Object.defineProperties(Element.prototype, {
 function useAttr<Obj extends Element & AdditionalElementProps, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
 {
   target._vf[propName] ??= []
-  target._vf[propName].value = defaultValue
+  const vf = target._vf[propName]
+  vf.value = defaultValue
   Object.defineProperty(target, propName, {
     get(): AttrType{
-      return target._vf[propName].value
+      return vf.value
     },
     set(value: AttrType){
-      const vf = target._vf[propName]
       vf.value = value
-      for(let i=0;i<vf.length;i++) vf[i](value)  //target._vf[propName].forEach(func=>func(value))
+      for(let i=0;i<vf.length;i++) vf[i](value)
     }
   })
   target[propName] = defaultValue
