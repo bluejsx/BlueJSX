@@ -17,7 +17,7 @@ interface AdditionalElementProps {
   on: typeof EventTarget.prototype.addEventListener,
   watch: (name: string, listener: (value: any)=>void) => void
   _vf: { [key: string]: Function[] & {value?: any} },
-	[key: PropertyKey]: any
+  [key: PropertyKey]: any
 }
 
 type JSXElement = Element & AdditionalElementProps
