@@ -100,7 +100,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
         prop(setter)
       }
 */
-      else if(isSVG){
+      else if(isSVG || key.includes('-')){
         element.setAttribute(key, prop)
       } else {
         //let's see if there would be any problem with IDL attr
