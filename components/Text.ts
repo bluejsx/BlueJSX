@@ -1,4 +1,3 @@
-const Txt = () =>{
-  return new Text()
-}
+const Txt = () => new Text()
+
 export default Txt
