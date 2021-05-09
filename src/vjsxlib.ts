@@ -34,7 +34,7 @@ function useAttr<Obj extends Element & AdditionalElementProps, PropName extends 
     },
     set(value: AttrType){
       vf.value = value
-      for(let i=0;i<vf.length;i++) vf[i](value)
+      for(let i=vf.length;i--;) vf[i](value)
     }
   })
   target[propName] = defaultValue
