@@ -26,7 +26,7 @@ type textSetter = (setter?: (v:any)=>void, element?: JSXElement)=> void;
 
 type HTMLTagName = keyof HTMLElementTagNameMap
 type SVGTagName = keyof SVGElementTagNameMap
-type JSXChildren = [ JSXElement | string | textSetter | JSXChildren ] | []
+type JSXChildren = ( JSXElement | string | textSetter | JSXChildren )[]
 
 declare namespace VJSX{
   namespace JSX {

@@ -116,7 +116,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
 
 const VJSX = {
   r: render,
-  Fragment: ({ children }: {children: [Element]}) =>children,
+  Fragment: ({ children }: {children: Element[]}) =>children,
 }
 
 export default VJSX
