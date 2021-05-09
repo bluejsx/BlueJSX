@@ -1,3 +1,4 @@
 import ProgressBar from './ProgressBar'
 import ElemList from './ElemList'
-export { ProgressBar, ElemList }
+import Txt from './Text'
+export { ProgressBar, ElemList, Txt }
