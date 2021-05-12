@@ -1,7 +1,7 @@
+const path = require('path')
 /**
  * @type {import('vite').UserConfig}
  */
-const path = require('path')
 export default {
   esbuild: {
     jsxFactory: 'VJSX.r',
