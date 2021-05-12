@@ -16,6 +16,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "main": "./src/vjsx.ts",
+  "types": "./src/@types/vjsx.d.ts",
   "files": [
     "src/",
     "lib/",
