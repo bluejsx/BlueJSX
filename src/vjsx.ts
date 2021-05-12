@@ -56,6 +56,7 @@ const processChild = (element: Element, child: any) =>{
 function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
 function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
 function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
+function render<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
 function render (component: HTMLTagName | SVGTagName | Function | any, props: jsxProps, ...children: JSXChildren){
   props ?? (props = {})
   let isSVG = false
@@ -100,7 +101,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
         prop(setter)
       }
 */
-      else if(isSVG || key.includes('-')){
+      else if(isSVG || key === 'style' || key.includes('-')){
         element.setAttribute(key, prop)
       } else {
         //let's see if there would be any problem with IDL attr

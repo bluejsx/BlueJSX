@@ -28,15 +28,33 @@ type HTMLTagName = keyof HTMLElementTagNameMap
 type SVGTagName = keyof SVGElementTagNameMap
 type JSXChildren = ( JSXElement | string | textSetter | JSXChildren )[]
 
+type VJSXHTMLAttrs<Element> = Partial<Element> & {
+  class?: string
+  children?: JSXChildren
+  ref?: [object, string]
+  style?: string
+}
+type VJSXSVGAttrs<Element> = {
+  [key in keyof Element]?: string
+} | {
+  class?: string
+  children?: JSXChildren
+  ref?: [object, string]
+  style?: string
+}
 declare namespace VJSX{
   namespace JSX {
     type Element = HTMLElement & AdditionalElementProps
     type IntrinsicElements = {
-      [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] | {class?: string, children?: JSXChildren, ref?: [object, string]}
+      [key in keyof HTMLElementTagNameMap]: VJSXHTMLAttrs<HTMLElementTagNameMap[key]>
     } & {
-      [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] | {class?: string, children?: JSXChildren, ref?: [object, string]}
+      [key in keyof SVGElementTagNameMap]: VJSXSVGAttrs<SVGElementTagNameMap[key]>
     }
   }
+  function r<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
+  function r<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
+  function r<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
+  function r<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
 }
 
 /*
