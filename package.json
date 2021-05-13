@@ -1,7 +1,7 @@
 {
   "name": "@vanillajsx/vjsx",
   "description": "VanillaJSX - pure javascript with JSX syntax",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "repository": {
     "type": "git",
     "url": "git://github.com/vanillajsx/VanillaJSX.git"
@@ -16,7 +16,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "main": "./src/vjsx.ts",
-  "types": "./src/@types/vjsx.d.ts",
   "files": [
     "src/",
     "lib/",
