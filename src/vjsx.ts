@@ -36,14 +36,7 @@ const generateTagName = (name: string): string =>{
 
 const processChild = (element: Element, child: any) =>{
   if(child instanceof Function) {
-    element.append('')
-    
-    const self = element.childNodes[element.childNodes.length-1] as Text
-    disableInnerSetter(element)
-    const setter = (v: any) =>{
-      self.data=v.toString()
-    }
-    child(setter, element)
+    child(element)
   }else if(child instanceof Array){
     for(const v of child){
       processChild(element, v)
