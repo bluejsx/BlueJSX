@@ -77,7 +77,7 @@ const Example = ({progValue=0, children})=>{
     </div>
   )
   useAttr(self, 'progValue', progValue)
-  self.watch('progValue',v=> progress.value = v)
+  self.watch('progValue', v=> progress.value = v)
 
   btn.onclick = () =>{
     /*
@@ -91,17 +91,6 @@ const Example = ({progValue=0, children})=>{
   return self	
 }
 ```
-### Text setter
-
-If you insert function into JSX element as a child, You will get a value-setter function of the text field. For example:
-```jsx
-let count = 0
-<div>
-  count: {(set, element)=>element.onclick=()=>set(count++)}!!!
-</div>
-```
-
-This element counts up the number of clicking of the element.
 
 ### Ref Attribute
 
@@ -158,6 +147,32 @@ Great! You can now be able to use the button element with the `btn` variable. Do
 //[<object for reference passing>, <name of the element you prefer to use>]
 ```
 
+### Text setter
+
+You can use [Text](https://developer.mozilla.org/en-US/docs/Web/API/Text) object (which is defined natively on browser) to change DOM texts dynamically. 
+
+```jsx
+const countText = new Text('0')
+<div onclick={()=>countText.data++}>
+  count: {countText}!!!
+</div>
+```
+
+The element above counts up the number of clicking of the element.
+
+Alternatively you can use JSX style `Text` node if you prefer using `ref` attribute:
+
+```jsx
+import { Txt } from '@vanillajsx/vjsx/components'
+
+const ref = {}
+<div ref={[ref, 'main']}>
+  count: <Txt ref={[ref, 'countText']} data='0' />!!!
+</div>
+
+const { main, countText } = ref
+main.onclick = () => countText.data++
+```
 
 ## Custom Element components
 
