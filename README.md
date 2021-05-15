@@ -6,6 +6,7 @@
 
 #### ⚠️Caution⚠️
 - This is still in Draft phase!
+- specification may change without notice
 ### Features
 - Component Based Development!
 - JSX syntax!
