@@ -1,7 +1,7 @@
 {
   "name": "@vanillajsx/vjsx",
   "description": "VanillaJSX - pure javascript with JSX syntax",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/vanillajsx/VanillaJSX.git"
