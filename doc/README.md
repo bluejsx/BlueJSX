@@ -95,7 +95,7 @@ const Example = ({progValue=0, children})=>{
 ### Ref Attribute
 
 You can avoid breaking down DOM trees using `ref` attribute. 
-Here is an example. By using `ref` attribute, you can replace the following code:
+By using `ref` attribute, you can replace the following code:
 ```jsx
 const btn = <button>click</button>
 const progress = <progress max='10' value='0' />
