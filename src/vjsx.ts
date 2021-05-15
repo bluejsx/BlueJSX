@@ -6,25 +6,7 @@ import { useAttr } from './vjsxlib'
 Object.defineProperty(EventTarget.prototype, 'on', {
   value: EventTarget.prototype.addEventListener
 })
-/*
-EventTarget.prototype.on = EventTarget.prototype.addEventListener;
 
-Element.prototype.ready = function(func: Function){
-  func(this)
-}
-*/
-
-const disableInnerSetter = (elem: ElementWithCustomProps) =>{
-  
-  Object.defineProperties(elem,{
-    innerHTML:{
-      set(){}
-    },
-    innerText:{
-      set(){}
-    }
-  })
-}
 
 let namelessCustomElementCount = 0
 const generateTagName = (name: string): string =>{
@@ -87,13 +69,6 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
       const prop = props[key]
       if(key==='class') element.classList.value = prop
       else if(key==='ref') prop[0][prop[1]] = element
-/*      else if(key.indexOf('set-')===0){
-        let setter: (value: any)=>void;
-        if(isSVG) setter = (value: any) => element.setAttribute(key.substring(4), value)
-        else setter = (value: any) => element[key.substring(4)] = value
-        prop(setter)
-      }
-*/
       else if(isSVG || key === 'style' || key.includes('-')){
         element.setAttribute(key, prop)
       } else {
