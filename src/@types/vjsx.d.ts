@@ -28,7 +28,7 @@ type HTMLTagName = keyof HTMLElementTagNameMap
 type SVGTagName = keyof SVGElementTagNameMap
 type JSXChildren = ( JSXElement | string | textSetter | JSXChildren )[]
 
-type VJSXHTMLAttrs<Element> = Partial<Element> & {
+type VJSXHTMLAttrs<Element> = Partial<Element> | {
   class?: string
   children?: JSXChildren
   ref?: [object, string]
