@@ -1,7 +1,6 @@
 //import { defineAttrsOptions, ElementWithCustomProps, jsxProps, AdditionalElementProps, VJSX } from './@types/vjsx.d';
 import './@types/vjsx.d';
 import { SVG_TAG_NAMES } from './data'
-import { useAttr } from './vjsxlib'
 
 Object.defineProperty(EventTarget.prototype, 'on', {
   value: EventTarget.prototype.addEventListener
@@ -89,7 +88,7 @@ const VJSX = {
 }
 
 export default VJSX
-export { useAttr }
+export { useAttr } from './vjsxlib'
 
 /*
 merge string items if there are continuous string items
