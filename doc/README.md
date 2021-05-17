@@ -18,9 +18,12 @@ elem1.append('hi!')
 FYI
 - VJSX sets attributes as [IDL attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#content_versus_idl_attributes). 
 - This means VJSX uses `elem['attrName']='value'` instead of `elem.setAttribute('attrName', 'value')`
-  - (except for `class` attribute and SVG elements)
   - This makes you able to set HTML properties such as `innerHTML` and `onclick`.
-
+  - Exceptions:
+    - SVG elements
+    - `class` and `style` attribute
+    - attributes that include dash `-`
+    
 ### Function components
 
 You can make components with functions.
@@ -47,54 +50,9 @@ document.querySelector('#app').appendChild(
   </App>)
 ```
 
-#### Dynamic Attributes
-VJSX provides `useAttr` function:
-```ts
-import { useAttr } from '@vanillajsx/vjsx'
-useAttr(elem: Element, propName: string, defaultValue: any)
-```
-- This defines custom property setter/getter on your element.
-- You are able to listen the value change using `watch` listener:
-    ```ts
-    elem.watch(propName: string, (newValue) => void)
-    ```
-    - `watch` listener is similar to `addEventListener` 
-    - The difference is that the listener function in `watch` recieves the new property value, not `Event` object.
-
-Example:
-
-```jsx
-import { useAttr } from '@vanillajsx/vjsx'
-
-const Example = ({progValue=0, children})=>{
-  const progress = <progress max='100' value={progValue}/>
-  const btn = <button>click</button>
-  const self = (
-    <div class='t3'>
-      {btn}
-      {progress}
-      {children}
-    </div>
-  )
-  useAttr(self, 'progValue', progValue)
-  self.watch('progValue', v=> progress.value = v)
-
-  btn.onclick = () =>{
-    /*
-      below just looks assigning a value to a property,
-      however this is running getter/setter method,
-      which executes all listener functions registered via `watch` method.
-    */
-    if(self.progValue<100) self.progValue+=10
-    else self.progValue = 0
-  }
-  return self	
-}
-```
-
 ### Ref Attribute
 
-You can avoid breaking down DOM trees using `ref` attribute. 
+You can avoid breaking down DOM trees.
 By using `ref` attribute, you can replace the following code:
 ```jsx
 const btn = <button>click</button>
@@ -173,6 +131,52 @@ const ref = {}
 const { main, countText } = ref
 main.onclick = () => countText.data++
 ```
+
+### Dynamic Attributes
+VJSX provides `useAttr` function:
+```ts
+import { useAttr } from '@vanillajsx/vjsx'
+useAttr(elem: Element, propName: string, defaultValue: any)
+```
+- This defines custom property setter/getter on your element.
+- You are able to listen the value change using `watch` listener:
+    ```ts
+    elem.watch(propName: string, (newValue) => void)
+    ```
+    - `watch` listener is similar to `addEventListener` 
+    - The difference is that the listener function in `watch` recieves the new property value, not `Event` object.
+
+Example:
+
+```jsx
+import { useAttr } from '@vanillajsx/vjsx'
+
+const Example = ({progValue=0, children})=>{
+  const progress = <progress max='100' value={progValue}/>
+  const btn = <button>click</button>
+  const self = (
+    <div class='t3'>
+      {btn}
+      {progress}
+      {children}
+    </div>
+  )
+  useAttr(self, 'progValue', progValue)
+  self.watch('progValue', v=> progress.value = v)
+
+  btn.onclick = () =>{
+    /*
+      below just looks assigning a value to a property,
+      however this is running getter/setter method,
+      which executes all listener functions registered via `watch` method.
+    */
+    if(self.progValue<100) self.progValue+=10
+    else self.progValue = 0
+  }
+  return self	
+}
+```
+
 
 ## Custom Element components
 
