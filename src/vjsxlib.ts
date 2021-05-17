@@ -5,6 +5,22 @@ const valueExists = (value: any): boolean =>{
   return !!value
 }
 
+class AttrHolder {
+  _vf: { [key: string]: Function[] & {value?: any} }
+  constructor(){
+    this._vf = {}
+  }
+  watch(name: string, listener: (value: any)=>void): void {
+    const valueField = this._vf[name]
+    if(!valueField){
+      this._vf[name] = [listener]
+    }else{
+      valueField.push(listener)
+      if(valueExists(valueField.value)) listener(valueField.value)
+    }
+  }
+}
+
 Object.defineProperties(Element.prototype, {
   _vf: {
     value: {} as { [key: string]: Function[] & {value?: any} }
@@ -23,7 +39,7 @@ Object.defineProperties(Element.prototype, {
 })
 
 
-function useAttr<Obj extends Element & AdditionalElementProps, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
+function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
 {
   target._vf[propName] ??= []
   const vf = target._vf[propName]
@@ -43,4 +59,4 @@ function useAttr<Obj extends Element & AdditionalElementProps, PropName extends 
 
 
 
-export { useAttr }
+export { useAttr, AttrHolder }

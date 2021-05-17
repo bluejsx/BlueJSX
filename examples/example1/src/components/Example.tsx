@@ -1,4 +1,4 @@
-import { useAttr } from '@vanillajsx/vjsx'
+import { useAttr, AttrHolder } from '@vanillajsx/vjsx'
 import { Txt, ElemList } from '@vanillajsx/vjsx/components'
 
 import { CustomProgress } from './CustomProgress'

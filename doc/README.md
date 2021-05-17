@@ -136,7 +136,7 @@ main.onclick = () => countText.data++
 VJSX provides `useAttr` function:
 ```ts
 import { useAttr } from '@vanillajsx/vjsx'
-useAttr(elem: Element, propName: string, defaultValue: any)
+useAttr(elem: AttrHolder, propName: string, defaultValue: any)
 ```
 - This defines custom property setter/getter on your element.
 - You are able to listen the value change using `watch` listener:
@@ -177,6 +177,22 @@ const Example = ({progValue=0, children})=>{
 }
 ```
 
+#### If you don't wont to set dynamic attributes on HTMLElements
+
+You can use `AttrHolder` object:
+
+```jsx
+import { useAttr, AttrHolder } from '@vanillajsx/vjsx'
+
+const attrHolder = new AttrHolder()
+
+useAttr(attrHolder, 'attr1', 0)
+attrHolder.watch('attr1', v=> console.log(v))
+
+attrHolder.attr1 = 50
+```
+
+This would be useful when you want to make private attributes, which can't be accesed outside of your function component.
 
 ## Custom Element components
 

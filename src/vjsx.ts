@@ -88,7 +88,7 @@ const VJSX = {
 }
 
 export default VJSX
-export { useAttr } from './vjsxlib'
+export { useAttr, AttrHolder } from './vjsxlib'
 
 /*
 merge string items if there are continuous string items
