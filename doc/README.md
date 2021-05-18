@@ -177,7 +177,7 @@ const Example = ({progValue=0, children})=>{
 }
 ```
 
-#### If you don't wont to define dynamic attributes on HTMLElements
+#### If you don't want to define dynamic attributes on HTMLElements
 
 You can use `AttrHolder` object:
 
