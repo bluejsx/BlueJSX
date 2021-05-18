@@ -47,6 +47,18 @@ export default {
   //... other settings
 }
 ```
+in your `tsconfig.json`/`jsconfig.json`
+```json5
+{
+  /*
+  ... your settings ...
+  You would need to state "jsx" option of your choice
+  */
+  "jsxFactory": "VJSX.r",
+  "jsxFragmentFactory": "VJSX.Fragment"
+}
+```
+
 Then your JSX code would be interpreted as VanillaJSX! Have fun!
 
 ---
@@ -58,8 +70,6 @@ Then your JSX code would be interpreted as VanillaJSX! Have fun!
 
 - [x] VanillaJSX processor
   - it dynamically appends components
-- [ ] make Typescript code suggestion work
-  - maybe making VSCode Extension might be a solution
 - [ ] Vite.js HMR Plugin
 - [ ] SSG builder
   - it generates 
