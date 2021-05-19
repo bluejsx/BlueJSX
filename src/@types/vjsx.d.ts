@@ -1,16 +1,7 @@
 //import VJSX from '../vjsx'
 
 interface jsxProps {
-  id?: string;
-  class?: string;
-  ref?: [object, string];
   [key: string]: any;
-}
-interface defineAttrsOptions {
-  [key: string]: PropertyDescriptor
-}
-interface ElementWithCustomProps extends Element{
-  [key: PropertyKey]: any
 }
 
 interface AdditionalElementProps {
@@ -22,11 +13,11 @@ interface AdditionalElementProps {
 
 type JSXElement = Element & AdditionalElementProps
 
-type textSetter = (setter?: (v:any)=>void, element?: JSXElement)=> void;
+type childFunc = (element?: JSXElement)=> void;
 
 type HTMLTagName = keyof HTMLElementTagNameMap
 type SVGTagName = keyof SVGElementTagNameMap
-type JSXChildren = ( JSXElement | string | textSetter | JSXChildren )[]
+type JSXChildren = ( JSXElement | string | childFunc | JSXChildren )[]
 
 type VJSXHTMLAttrs<Element> = Partial<Element> | {
   class?: string

@@ -1,4 +1,3 @@
-//import { defineAttrsOptions, ElementWithCustomProps, jsxProps, AdditionalElementProps, VJSX } from './@types/vjsx.d';
 import './@types/vjsx.d';
 import { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE } from './data'
 
