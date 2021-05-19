@@ -44,6 +44,13 @@ type VJSXSVGAttrs<Element> = {
   style?: string
   [key: string]: any;
 }
+
+type JSXElementTags = {
+  [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps
+} & {
+  [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
+}
+
 declare namespace VJSX{
   namespace JSX {
     type Element = HTMLElement & AdditionalElementProps

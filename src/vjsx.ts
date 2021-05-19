@@ -88,41 +88,4 @@ const VJSX = {
 
 export default VJSX
 export { useAttr, AttrHolder } from './vjsxlib'
-
-/*
-merge string items if there are continuous string items
-
-  const childList = []
-  let strComp = []
-  let previousChildWasString = false;
-  for(let i=0;i<children.length;i++){
-    const v=children[i]
-    if(typeof v === 'string' || typeof v === 'function'){
-      //when the child was string or function
-      strComp.push(v)
-      if(previousChildWasString){
-        //if previous child & current child are str/func  
-        
-        /*
-        children[i-1]+=v
-        children.splice(i, 1)
-        i--
-        
-      }else{
-        //if previous child was NOT str/func & current child are str/func
-        
-        previousChildWasString=true
-      }
-    }else{
-      //when the child was NOT str/func
-
-      if(strComp.length!==0) childList.push(strComp) 
-      strComp=[]
-      childList.push(v)
-      
-      previousChildWasString=false
-    } 
-  }
-  let childIndex=0
-
-  */
+export type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName]

@@ -1,6 +1,5 @@
-import { useAttr, AttrHolder } from '@vanillajsx/vjsx'
+import { useAttr, AttrHolder, ElemType } from '@vanillajsx/vjsx'
 import { Txt, ElemList } from '@vanillajsx/vjsx/components'
-
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
@@ -10,8 +9,8 @@ const Example = ({progValue=0, children=null})=>{
   //const progress = <CustomProgress max='100' value={progValue}/>
   //const btn = <button>click</button>
   const refs: {
-    btn?: HTMLButtonElement,
-    progress?: HTMLProgressElement
+    btn?: ElemType<'button'>,
+    progress?: ElemType<'progress'>
     percentageText?: Text
   } = {}
   //const percentageText = new Text(progValue.toString())
