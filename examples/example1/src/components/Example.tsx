@@ -1,5 +1,5 @@
 import { useAttr, AttrHolder, ElemType } from '@vanillajsx/vjsx'
-import { Txt, ElemList } from '@vanillajsx/vjsx/components'
+import { Txt } from '@vanillajsx/vjsx/components'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
