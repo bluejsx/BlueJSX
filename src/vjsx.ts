@@ -6,14 +6,6 @@ Object.defineProperty(EventTarget.prototype, 'on', {
 })
 
 
-let namelessCustomElementCount = 0
-const generateTagName = (name: string): string =>{
-  if(name==='default'){
-    return `custom-elem-${(namelessCustomElementCount++).toString(36)}`
-  }
-  return name.replace(/\B[A-Z]/g,'-$&').toLowerCase()
-}
-
 const processChild = (element: Element, child: any) =>{
   if(child instanceof Function) {
     child(element)
@@ -48,11 +40,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
       try{
         element = new component()
       }catch(e){
-        customElements.define(
-          generateTagName(component.name),
-          component
-        )
-        element = new component()
+        console.error(e)
       }
     }else{
       //if component is a function which returns Element:
