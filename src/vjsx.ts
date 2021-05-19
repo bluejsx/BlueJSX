@@ -1,6 +1,6 @@
 //import { defineAttrsOptions, ElementWithCustomProps, jsxProps, AdditionalElementProps, VJSX } from './@types/vjsx.d';
 import './@types/vjsx.d';
-import { SVG_TAG_NAMES } from './data'
+import { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE } from './data'
 
 Object.defineProperty(EventTarget.prototype, 'on', {
   value: EventTarget.prototype.addEventListener
@@ -66,9 +66,8 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
   if(props){
     for(const key in props){
       const prop = props[key]
-      if(key==='class') element.classList.value = prop
-      else if(key==='ref') prop[0][prop[1]] = element
-      else if(isSVG || key === 'style' || key.includes('-')){
+      if(key==='ref') prop[0][prop[1]] = element
+      else if(isSVG || ONLY_VIA_SET_ATTRIBUTE.includes(key) || key.includes('-')){
         element.setAttribute(key, prop)
       } else {
         //let's see if there would be any problem with IDL attr

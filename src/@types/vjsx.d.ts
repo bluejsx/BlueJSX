@@ -33,6 +33,7 @@ type VJSXHTMLAttrs<Element> = Partial<Element> | {
   children?: JSXChildren
   ref?: [object, string]
   style?: string
+  [key: string]: any
 }
 type VJSXSVGAttrs<Element> = {
   [key in keyof Element]?: string
@@ -41,6 +42,7 @@ type VJSXSVGAttrs<Element> = {
   children?: JSXChildren
   ref?: [object, string]
   style?: string
+  [key: string]: any;
 }
 declare namespace VJSX{
   namespace JSX {

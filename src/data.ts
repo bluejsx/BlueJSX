@@ -87,4 +87,9 @@ const SVG_TAG_NAMES = [
   'view',
   'vkern'
 ]
-export { SVG_TAG_NAMES }
+const ONLY_VIA_SET_ATTRIBUTE = [
+  'class',
+  'style',
+  'for'
+]
+export { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE }
