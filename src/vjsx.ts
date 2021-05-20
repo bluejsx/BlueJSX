@@ -41,6 +41,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
         element = new component()
       }catch(e){
         console.error(e)
+        return null
       }
     }else{
       //if component is a function which returns Element:
