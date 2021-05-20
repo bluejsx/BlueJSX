@@ -1,4 +1,4 @@
-const SVG_TAG_NAMES = [
+const SVG_TAG_NAMES = new Set([
   'altGlyph',
   'altGlyphDef',
   'altGlyphItem',
@@ -86,10 +86,10 @@ const SVG_TAG_NAMES = [
   'use',
   'view',
   'vkern'
-]
-const ONLY_VIA_SET_ATTRIBUTE = [
+])
+const ONLY_VIA_SET_ATTRIBUTE = new Set([
   'class',
   'style',
   'for'
-]
+])
 export { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE }

@@ -28,7 +28,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
   let element: Element;
 
   if(typeof component === 'string'){
-    if(SVG_TAG_NAMES.includes(component)){
+    if(SVG_TAG_NAMES.has(component)){
       element = document.createElementNS('http://www.w3.org/2000/svg', component)
       isSVG = true
     }else {
@@ -55,7 +55,7 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
     for(const key in props){
       const prop = props[key]
       if(key==='ref') prop[0][prop[1]] = element
-      else if(isSVG || ONLY_VIA_SET_ATTRIBUTE.includes(key) || key.includes('-')){
+      else if(isSVG || ONLY_VIA_SET_ATTRIBUTE.has(key) || key.includes('-')){
         element.setAttribute(key, prop)
       } else {
         //let's see if there would be any problem with IDL attr
