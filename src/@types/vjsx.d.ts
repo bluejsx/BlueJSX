@@ -44,7 +44,7 @@ type JSXElementTags = {
 
 declare namespace VJSX{
   namespace JSX {
-    type Element = HTMLElement & AdditionalElementProps
+    type Element = (HTMLElement | SVGElement) & AdditionalElementProps
     type IntrinsicElements = {
       [key in keyof HTMLElementTagNameMap]: VJSXHTMLAttrs<HTMLElementTagNameMap[key]>
     } & {
