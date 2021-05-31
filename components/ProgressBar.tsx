@@ -1,11 +1,12 @@
+import { ElemType } from '@vanillajsx/vjsx'
 import './ProgressBar.scss'
 class ProgressBar extends HTMLElement{
   #max = 1
   #value = null
-  #bar: HTMLElement
+  #bar: ElemType<'div'>
   constructor(){
     super();
-    this.#bar = <div part='bar'/>
+    this.#bar = <div part='bar'/> as ElemType<'div'>
     const shadow = this.attachShadow({mode: 'closed'})
     shadow.appendChild(this.#bar);
   }
