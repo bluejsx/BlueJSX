@@ -1,11 +1,10 @@
-import './@types/vjsx.d'
 
 const valueExists = (value: any): boolean =>{
   if(value===0) return true
   return !!value
 }
 
-class AttrHolder {
+export class AttrHolder {
   _vf: { [key: string]: Function[] & {value?: any} }
   constructor(){
     this._vf = {}
@@ -39,7 +38,7 @@ Object.defineProperties(Element.prototype, {
 })
 
 
-function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
+export function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
 {
   target._vf[propName] ??= []
   const vf = target._vf[propName]
@@ -52,11 +51,6 @@ function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(targ
       vf.value = value
       for(let i=vf.length;i--;) vf[i](value)
     }
-  })
-  target[propName] = defaultValue
+  });
+  (target as any)[propName] = defaultValue
 }
-
-
-
-
-export { useAttr, AttrHolder }

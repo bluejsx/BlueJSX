@@ -6,19 +6,19 @@
     "type": "git",
     "url": "git://github.com/vanillajsx/VanillaJSX.git"
   },
+  "type": "module",
   "scripts": {
     "dev": "vite examples/example1",
-    "build": "vite build",
+    "build": "tsup src/index.ts --format esm --dts --minify",
     "build:example": "vite build examples/example1",
     "serve": "vite preview"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "./src/vjsx.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "src/",
-    "lib/",
     "dist/",
     "components/"
   ],
@@ -38,6 +38,8 @@
   ],
   "devDependencies": {
     "sass": "^1.32.8",
+    "tsup": "^4.11.1",
+    "typescript": "^4.3.2",
     "vite": "^2.1.5"
   },
   "bugs": {

@@ -3,7 +3,7 @@ import { Txt } from '@vanillajsx/vjsx/components'
 import { CustomProgress } from './CustomProgress'
 
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({progValue=0, children=null})=>{
+const Example = ({ progValue = 0, children = null }) => {
 
   //declare elements
   //const progress = <CustomProgress max='100' value={progValue}/>
@@ -17,7 +17,7 @@ const Example = ({progValue=0, children=null})=>{
   const self = (
     <div class='t3'>
       <button ref={[refs, 'btn']}>click</button>
-      <CustomProgress ref={[refs, 'progress']} max='100' value={progValue}/>
+      <CustomProgress ref={[refs, 'progress']} max='100' value={progValue} />
       <Txt ref={[refs, 'percentageText']}>{progValue}</Txt> %
       {children}
     </div>
@@ -33,22 +33,22 @@ const Example = ({progValue=0, children=null})=>{
 
   // functionalities
   //when `self.progValue` changed, set `progress.value` to `self.progValue`
-  self.watch('progValue',v=>{
+  self.watch('progValue', v => {
     progress.value = v
     percentageText.data = v
   })
 
-  btn.onclick = () =>{
+  btn.onclick = () => {
     /*
       below just looks assigning a value to a property,
       however this is running getter/setter method,
       which executes all registered listener functions via `watch` method.
     */
-    if(self.progValue<100) self.progValue+=10
+    if (self.progValue < 100) self.progValue += 10
     else self.progValue = 0
   }
 
   // return self element
-  return self	
+  return self
 }
 export default Example

@@ -4,12 +4,10 @@ If you know a better way to organize the structure, please let me know!
 
 ```
 ./src
-├── @types
-│   └── vjsx.d.ts
 ├── README.md
 ├── data.ts
 ├── tsconfig.json
-├── vjsx.ts
+├── index.ts
+├── types.ts
 └── vjsxlib.ts
 ```
-currently `vjsx.ts` is the file which provides JSX loader (`VJSX.r`)

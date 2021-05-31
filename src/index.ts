@@ -1,5 +1,7 @@
-import './@types/vjsx.d';
+import type { HTMLTagName, jsxProps, JSXChildren, AdditionalElementProps, SVGTagName, JSXElementTags } from './types'
+
 import { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE } from './data'
+
 
 Object.defineProperty(EventTarget.prototype, 'on', {
   value: EventTarget.prototype.addEventListener
