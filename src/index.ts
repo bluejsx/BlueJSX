@@ -39,19 +39,14 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
   }else if(typeof component === 'function'){
     //if component is custom element class
     if(component?.prototype instanceof Element){
-      try{
-        element = new component()
-      }catch(e){
-        console.error(e)
-        return null
-      }
+      element = new component()
     }else{
       //if component is a function which returns Element:
       element = component({...props, children: [...children]})
       children.length = 0
     }
   }else{
-    throw new Error('using invalid thing used as element tag.')
+    throw new Error('Invalid Component')
   }
   if(props){
     for(const key in props){
