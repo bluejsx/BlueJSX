@@ -17,14 +17,14 @@ declare type childFunc = (element?: JSXElement) => void;
 declare type HTMLTagName = keyof HTMLElementTagNameMap;
 declare type SVGTagName = keyof SVGElementTagNameMap;
 declare type JSXChildren = (JSXElement | string | childFunc | JSXChildren)[];
-declare type VJSXHTMLAttrs<Element> = Partial<Element> | {
+declare type BlueHTMLAttrs<Element> = Partial<Element> | {
     class?: string;
     children?: JSXChildren;
     ref?: [object, string];
     style?: string;
     [key: string]: any;
 };
-declare type VJSXSVGAttrs<Element> = {
+declare type BlueSVGAttrs<Element> = {
     [key in keyof Element]?: string;
 } | {
     class?: string;
@@ -39,13 +39,13 @@ declare type JSXElementTags = {
     [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps;
 };
 declare global {
-    namespace VJSX {
+    namespace Blue {
         namespace JSX {
             type Element = (HTMLElement | SVGElement) & AdditionalElementProps;
             type IntrinsicElements = {
-                [key in keyof HTMLElementTagNameMap]: VJSXHTMLAttrs<HTMLElementTagNameMap[key]>;
+                [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key]>;
             } & {
-                [key in keyof SVGElementTagNameMap]: VJSXSVGAttrs<SVGElementTagNameMap[key]>;
+                [key in keyof SVGElementTagNameMap]: BlueSVGAttrs<SVGElementTagNameMap[key]>;
             };
         }
     }
@@ -66,7 +66,7 @@ declare function render<T extends HTMLTagName>(component: T, props: jsxProps, ..
 declare function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
 declare function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
 declare function render<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
-declare const VJSX: {
+declare const Blue: {
     r: typeof render;
     Fragment: ({ children }: {
         children: Element[];
@@ -75,5 +75,5 @@ declare const VJSX: {
 
 declare type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName];
 
-export default VJSX;
+export default Blue;
 export { AttrHolder, ElemType, useAttr };

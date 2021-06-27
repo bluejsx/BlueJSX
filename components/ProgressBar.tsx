@@ -1,4 +1,4 @@
-import { ElemType } from '@vanillajsx/vjsx'
+import { ElemType } from 'bluejsx'
 import './ProgressBar.scss'
 class ProgressBar extends HTMLElement{
   #max = 1

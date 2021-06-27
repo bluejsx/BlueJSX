@@ -7,7 +7,7 @@
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "jsx": "preserve",
-    "jsxFactory": "VJSX.r",
-    "jsxFragmentFactory": "VJSX.Fragment"
+    "jsxFactory": "Blue.r",
+    "jsxFragmentFactory": "Blue.Fragment"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@vanillajsx/vjsx",
-  "description": "VanillaJSX - pure javascript with JSX syntax",
-  "version": "0.1.7",
+  "name": "bluejsx",
+  "description": "BlueJSX - pure javascript with JSX syntax",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/vanillajsx/VanillaJSX.git"
@@ -24,16 +24,9 @@
   ],
   "keywords": [
     "jsx",
-    "vjsx",
     "vanillajs",
-    "vanillajsx",
-    "frontend"
-  ],
-  "tags": [
-    "jsx",
-    "vjsx",
-    "vanillajs",
-    "vanillajsx",
+    "bluejsx",
+    "lightweight",
     "frontend"
   ],
   "devDependencies": {

@@ -18,14 +18,14 @@ export type HTMLTagName = keyof HTMLElementTagNameMap
 export type SVGTagName = keyof SVGElementTagNameMap
 export type JSXChildren = ( JSXElement | string | childFunc | JSXChildren )[]
 
-export type VJSXHTMLAttrs<Element> = Partial<Element> | {
+export type BlueHTMLAttrs<Element> = Partial<Element> | {
   class?: string
   children?: JSXChildren
   ref?: [object, string]
   style?: string
   [key: string]: any
 }
-export type VJSXSVGAttrs<Element> = {
+export type BlueSVGAttrs<Element> = {
   [key in keyof Element]?: string
 } | {
   class?: string
@@ -41,13 +41,13 @@ export type JSXElementTags = {
   [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
 }
 declare global {
-  namespace VJSX{
+  namespace Blue{
     namespace JSX {
       type Element = (HTMLElement | SVGElement) & AdditionalElementProps
       type IntrinsicElements = {
-        [key in keyof HTMLElementTagNameMap]: VJSXHTMLAttrs<HTMLElementTagNameMap[key]>
+        [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key]>
       } & {
-        [key in keyof SVGElementTagNameMap]: VJSXSVGAttrs<SVGElementTagNameMap[key]>
+        [key in keyof SVGElementTagNameMap]: BlueSVGAttrs<SVGElementTagNameMap[key]>
       }
     }
   }

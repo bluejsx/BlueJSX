@@ -1,4 +1,4 @@
-import { useAttr } from '@vanillajsx/vjsx'
+import { useAttr } from 'bluejsx'
 import './menu.scss'
 
 const contents = [

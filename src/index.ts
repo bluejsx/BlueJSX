@@ -66,11 +66,11 @@ function render (component: HTMLTagName | SVGTagName | Function | any, props: js
   return element;
 }
 
-const VJSX = {
+const Blue = {
   r: render,
   Fragment: ({ children }: {children: Element[]}) =>children,
 }
 
-export default VJSX
-export { useAttr, AttrHolder } from './vjsxlib'
+export default Blue
+export { useAttr, AttrHolder } from './bjsxlib'
 export type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName]

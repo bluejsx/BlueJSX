@@ -16,8 +16,8 @@ elem1.id = 'elem1'
 elem1.append('hi!')
 ```
 FYI
-- VJSX sets attributes as [IDL attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#content_versus_idl_attributes). 
-- This means VJSX uses `elem['attrName']='value'` instead of `elem.setAttribute('attrName', 'value')`
+- Blue sets attributes as [IDL attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#content_versus_idl_attributes). 
+- This means Blue uses `elem['attrName']='value'` instead of `elem.setAttribute('attrName', 'value')`
   - This makes you able to set HTML properties such as `innerHTML` and `onclick`.
   - Exceptions:
     - SVG elements
@@ -121,7 +121,7 @@ The element above counts up the number of clicking of the element.
 Alternatively you can use JSX style `Text` node if you prefer using `ref` attribute:
 
 ```jsx
-import { Txt } from '@vanillajsx/vjsx/components'
+import { Txt } from 'bluejsx/components'
 
 const ref = {}
 <div ref={[ref, 'main']}>
@@ -133,9 +133,9 @@ main.onclick = () => countText.data++
 ```
 
 ### Dynamic Attributes
-VJSX provides `useAttr` function:
+Blue provides `useAttr` function:
 ```ts
-import { useAttr } from '@vanillajsx/vjsx'
+import { useAttr } from 'bluejsx'
 useAttr(elem: AttrHolder, propName: string, defaultValue: any)
 ```
 - This defines custom property setter/getter on your element.
@@ -149,7 +149,7 @@ useAttr(elem: AttrHolder, propName: string, defaultValue: any)
 Example:
 
 ```jsx
-import { useAttr } from '@vanillajsx/vjsx'
+import { useAttr } from 'bluejsx'
 
 const Example = ({progValue=0, children})=>{
   const progress = <progress max='100' value={progValue}/>
@@ -182,7 +182,7 @@ const Example = ({progValue=0, children})=>{
 You can use `AttrHolder` object:
 
 ```jsx
-import { useAttr, AttrHolder } from '@vanillajsx/vjsx'
+import { useAttr, AttrHolder } from 'bluejsx'
 
 const attrHolder = new AttrHolder()
 
