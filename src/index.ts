@@ -73,4 +73,5 @@ const Blue = {
 
 export default Blue
 export { useAttr, AttrHolder } from './bjsxlib'
+/** Type for specific BlueJSX elements. Usage example: ElemType<'div'> */
 export type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName]

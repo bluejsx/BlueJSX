@@ -51,6 +51,9 @@ declare global {
     }
 }
 
+/**
+ * An object class which can be used with useAttr
+ */
 declare class AttrHolder {
     _vf: {
         [key: string]: Function[] & {
@@ -60,6 +63,12 @@ declare class AttrHolder {
     constructor();
     watch(name: string, listener: (value: any) => void): void;
 }
+/**
+ *
+ * @param target Your BlueJSX element or AttrHolder object.
+ * @param propName Name of the property which you are defining.
+ * @param defaultValue Set your default value.
+ */
 declare function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>;
 
 declare function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
@@ -73,6 +82,7 @@ declare const Blue: {
     }) => Element[];
 };
 
+/** Type for specific BlueJSX elements. Usage example: ElemType<'div'> */
 declare type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName];
 
 export default Blue;

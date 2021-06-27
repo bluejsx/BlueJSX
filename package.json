@@ -1,10 +1,10 @@
 {
   "name": "bluejsx",
   "description": "BlueJSX - pure javascript with JSX syntax",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vanillajsx/VanillaJSX.git"
+    "url": "git://github.com/bluejsx/BlueJSX.git"
   },
   "type": "module",
   "scripts": {
@@ -37,9 +37,9 @@
     "normalize-url": ">=4.5.1"
   },
   "bugs": {
-    "url": "https://github.com/vanillajsx/VanillaJSX/issues"
+    "url": "https://github.com/bluejsx/BlueJSX/issues"
   },
-  "homepage": "https://vanillajsx.github.io/",
+  "homepage": "https://bluejsx.github.io/",
   "directories": {
     "doc": "doc",
     "example": "examples",

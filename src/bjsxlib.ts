@@ -3,7 +3,9 @@ const valueExists = (value: any): boolean =>{
   if(value===0) return true
   return !!value
 }
-
+/**
+ * An object class which can be used with useAttr
+ */
 export class AttrHolder {
   _vf: { [key: string]: Function[] & {value?: any} }
   constructor(){
@@ -37,7 +39,12 @@ Object.defineProperties(Element.prototype, {
   }
 })
 
-
+/**
+ * 
+ * @param target Your BlueJSX element or AttrHolder object.
+ * @param propName Name of the property which you are defining.
+ * @param defaultValue Set your default value.
+ */
 export function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
 {
   target._vf[propName] ??= []
