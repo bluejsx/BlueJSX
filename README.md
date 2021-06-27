@@ -2,7 +2,7 @@
 
 ### Just a pure Javascript with JSX syntax.
 
-[Running Demo](https://vanillajsx.github.io/)
+[Running Demo](https://bluejsx.github.io/)
 
 #### ⚠️Caution⚠️
 - This is still in Draft phase!
@@ -33,7 +33,7 @@ elem1.append('hi!')
 ---
 ## Installation
 ```sh
-npm i @vanillajsx/vjsx
+npm i bluejsx
 ```
 ### for [vitejs](https://vitejs.dev/)
 in your `vite.config.js`:
@@ -64,11 +64,11 @@ Then your JSX code would be interpreted as VanillaJSX! Have fun!
 ---
 ## Usage
 
-### see [documentation](https://github.com/vanillajsx/VanillaJSX/tree/master/doc)
+### see [documentation](https://github.com/bluejsx/BlueJSX/tree/master/doc)
 
 ## Roadmap
 
-- [x] VanillaJSX processor
+- [x] BlueJSX processor
   - it dynamically appends components
 - [ ] Vite.js HMR Plugin
 - [ ] SSG builder
