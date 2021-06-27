@@ -1,4 +1,4 @@
-# SkyblueJSX
+# BlueJSX
 
 ### Just a pure Javascript with JSX syntax.
 
