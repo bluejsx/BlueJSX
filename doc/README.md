@@ -177,19 +177,19 @@ const Example = ({progValue=0, children})=>{
 }
 ```
 
-#### If you don't want to define dynamic attributes on HTMLElements
+#### If you want to use Protected Attributes (States)
 
 You can use `AttrHolder` object:
 
 ```jsx
 import { useAttr, AttrHolder } from 'bluejsx'
 
-const attrHolder = new AttrHolder()
+const state = new AttrHolder()
 
-useAttr(attrHolder, 'attr1', 0)
-attrHolder.watch('attr1', v=> console.log(v))
+useAttr(state, 'attr1', 0)
+state.watch('attr1', v=> console.log(v))
 
-attrHolder.attr1 = 50
+state.attr1 = 50
 ```
 
 This would be useful when you want to make private attributes, which can't be accesed outside of your function component.
