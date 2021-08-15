@@ -85,5 +85,4 @@ declare const Blue: {
 /** Type for specific BlueJSX elements. Usage example: ElemType<'div'> */
 declare type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName];
 
-export default Blue;
-export { AttrHolder, ElemType, useAttr };
+export { AttrHolder, ElemType, Blue as default, useAttr };
