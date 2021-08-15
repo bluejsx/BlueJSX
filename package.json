@@ -1,7 +1,7 @@
 {
   "name": "bluejsx",
   "description": "BlueJSX - pure javascript with JSX syntax",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/bluejsx/BlueJSX.git"
@@ -19,8 +19,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist/",
-    "components/"
+    "dist/"
   ],
   "keywords": [
     "jsx",
@@ -41,7 +40,6 @@
   },
   "homepage": "https://bluejsx.github.io/",
   "directories": {
-    "doc": "doc",
     "example": "examples",
     "lib": "lib"
   },
