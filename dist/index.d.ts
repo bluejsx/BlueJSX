@@ -38,6 +38,7 @@ declare type JSXElementTags = {
 } & {
     [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps;
 };
+declare type JSXElementTagNames = keyof JSXElementTags;
 declare global {
     namespace Blue {
         namespace JSX {
@@ -83,6 +84,14 @@ declare const Blue: {
 };
 
 /** Type for specific BlueJSX elements. Usage example: ElemType<'div'> */
-declare type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName];
+declare type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName];
+declare type RefType<M extends {
+    [name: string]: (JSXElementTagNames | HTMLElement | Function);
+}> = {
+    [key in keyof M]?: M[key] extends JSXElementTagNames ? ElemType<M[key]> : M[key] extends HTMLElement ? M[key] : M[key] extends ((...args: any) => any) ? ReturnType<M[key]> : any;
+};
+declare type FuncCompParam<Param> = {
+    children?: [Blue.JSX.Element];
+} & Param;
 
-export { AttrHolder, ElemType, Blue as default, useAttr };
+export { AttrHolder, ElemType, FuncCompParam, RefType, Blue as default, useAttr };

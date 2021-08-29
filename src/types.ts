@@ -40,6 +40,8 @@ export type JSXElementTags = {
 } & {
   [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
 }
+export type JSXElementTagNames = keyof JSXElementTags
+
 declare global {
   namespace Blue{
     namespace JSX {

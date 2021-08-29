@@ -1,28 +1,28 @@
-import { useAttr, AttrHolder, ElemType } from 'bluejsx'
-import { Txt } from 'bluejsx/components'
-import { CustomProgress } from './CustomProgress'
+import { useAttr, AttrHolder, ElemType, RefType, FuncCompParam } from 'bluejsx'
 
+import { CustomProgress } from './CustomProgress'
+import Header from './Header'
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({ progValue = 0, children = null }) => {
+const Example = ({ progValue = 0, children = null }: FuncCompParam<{progValue: number}>) => {
 
   //declare elements
   //const progress = <CustomProgress max='100' value={progValue}/>
   //const btn = <button>click</button>
-  const refs: {
-    btn?: ElemType<'button'>,
-    progress?: ElemType<'progress'>
-    percentageText?: Text
-  } = {}
-  //const percentageText = new Text(progValue.toString())
+  const refs: RefType<{
+    btn: 'button',
+    progress: CustomProgress
+    //header: typeof Header
+  }> = {}
+  const percentageText = new Text(progValue.toString())
   const self = (
     <div class='t3'>
       <button ref={[refs, 'btn']}>click</button>
       <CustomProgress ref={[refs, 'progress']} max='100' value={progValue} />
-      <Txt ref={[refs, 'percentageText']}>{progValue}</Txt> %
+      %
       {children}
     </div>
   )
-  const { btn, progress, percentageText } = refs
+  const { btn, progress } = refs
 
   /*
   below defines a property named 'progValue',

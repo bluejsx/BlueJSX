@@ -1,4 +1,4 @@
-import type { HTMLTagName, jsxProps, JSXChildren, AdditionalElementProps, SVGTagName, JSXElementTags } from './types'
+import type { HTMLTagName, jsxProps, JSXChildren, AdditionalElementProps, SVGTagName, JSXElementTags, JSXElementTagNames } from './types'
 
 import { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE } from './data'
 
@@ -74,4 +74,11 @@ const Blue = {
 export default Blue
 export { useAttr, AttrHolder } from './bjsxlib'
 /** Type for specific BlueJSX elements. Usage example: ElemType<'div'> */
-export type ElemType<tagName extends keyof JSXElementTags> = JSXElementTags[tagName]
+export type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName]
+
+export type RefType<M extends {[name: string]: ( JSXElementTagNames | HTMLElement | Function )}> = {
+  [key in keyof M]?: M[key] extends JSXElementTagNames ? ElemType<M[key]> : M[key] extends HTMLElement ? M[key] : M[key] extends ((...args: any)=>any) ? ReturnType<M[key]> : any
+}
+export type FuncCompParam<Param> = {
+  children?: [Blue.JSX.Element]
+} & Param
