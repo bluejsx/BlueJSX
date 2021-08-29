@@ -93,7 +93,7 @@ export type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagNam
  * }> = {}
  * ```
  */
-export type RefType<M extends {[name: string]: ( JSXElementTagNames | HTMLElement | Function )}> = {
+export type RefType<M extends {[name: string]: ( JSXElementTagNames | HTMLElement | Function | string )}> = {
   [key in keyof M]?: M[key] extends JSXElementTagNames ? ElemType<M[key]> : M[key] extends HTMLElement ? M[key] : M[key] extends ((...args: any)=>any) ? ReturnType<M[key]> : any
 }
 
