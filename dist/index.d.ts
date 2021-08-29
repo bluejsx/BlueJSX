@@ -105,7 +105,7 @@ declare type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagNa
 declare type RefType<M extends {
     [name: string]: (JSXElementTagNames | HTMLElement | Function | string);
 }> = {
-    [key in keyof M]?: M[key] extends JSXElementTagNames ? ElemType<M[key]> : M[key] extends HTMLElement ? M[key] : M[key] extends ((...args: any) => any) ? ReturnType<M[key]> : any;
+    [key in keyof M]?: M[key] extends JSXElementTagNames ? ElemType<M[key]> : M[key] extends HTMLElement ? M[key] : M[key] extends ((...args: any) => any) ? ReturnType<M[key]> : Blue.JSX.Element;
 };
 /**
  * usage:
