@@ -1,24 +1,29 @@
-# BlueJSX
+
+
+<div align='center'>
+
+![logo](https://bluejsx.github.io/vjsx.png)
+#  Welcome to BlueJSX!
 
 ### Just a pure Javascript with JSX syntax.
 
-[Running Demo](https://bluejsx.github.io/)
+Code with pure Javascript, components, and JSX!
+</div>
 
-#### ⚠️Caution⚠️
-- This is still in Draft phase!
-- specification may change without notice
+---
+
 ### Features
-- Component Based Development!
-- JSX syntax!
-- NO complex framework!
+- Component Based Development
+- JSX syntax
+- NO complex framework
 - NO virtual DOMs! Just use your familiar HTML DOMs!
 - No Re-rendering by its framework, easier for developers to understand the behavior
 - Less Learning Difficulty than React
-- Just use your JS skills!
 - If you want to change DOM attributes or texts, JUST SET THEM BY YOURSELF!
 - TS support
 
----
+
+
 ### How the Coding Works
 When you code this:
 ```jsx
@@ -30,47 +35,62 @@ const elem1 = document.createElement('div')
 elem1.id = 'elem1'
 elem1.append('hi!')
 ```
----
+
+
+
 ## Installation
+
+If you prefer JS over TS, replace `bluejsx/templates/vite-ts` with `bluejsx/templates/vite-js`:
 ```sh
-npm i bluejsx
+npx degit bluejsx/templates/vite-ts my-blue-app
+cd my-blue-app
+npm i
 ```
-### for [vitejs](https://vitejs.dev/)
-in your `vite.config.js`:
+Congrats! Your environment is ready!
+
+
+To start dev server, run:
+
+```sh
+npm run dev
+```
+
+To build you project, run:
+
+```sh
+npm run build
+```
+
+### Enabling BlueJSX manually in your vite project
+If you want to move your pre-existing vite project into the BlueJSX project, please follow the instruction below:
+
+```
+npm i -D bluejsx vite-with-bluejsx
+```
+
+In your `vite.config.js`:
+
 ```js
-export default {
-  esbuild: {
-    jsxFactory: 'Blue.r',
-    jsxFragment: 'Blue.Fragment',
-    jsxInject: `import Blue from 'bluejsx'`
-  },
-  //... other settings
-}
-```
-in your `tsconfig.json`/`jsconfig.json`
-```json5
-{
-  /*
-  ... your settings ...
-  You would need to state "jsx" option of your choice
-  */
-  "jsxFactory": "Blue.r",
-  "jsxFragmentFactory": "Blue.Fragment"
-}
+import withBlueJSX from 'vite-with-bluejsx'
+export default withBlueJSX({
+  // your vite settings
+})
 ```
 
-Then your JSX code would be interpreted as VanillaJSX! Have fun!
 
----
-## Usage
 
-### see [documentation](https://github.com/bluejsx/BlueJSX/tree/master/doc)
+## Document
+
+### Please see the [document](https://bluejsx.github.io/docs/)
+
 
 ## Roadmap
 
 - [x] BlueJSX processor
   - it dynamically appends components
-- [ ] Vite.js HMR Plugin
+- [x] Vite.js HMR Plugin
+  - HMR updates the DOM without reloading the whole page during dev
+  - Experimental
 - [ ] SSG builder
   - it generates 
     - pre-rendered HTML
