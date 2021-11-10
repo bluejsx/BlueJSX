@@ -1,7 +1,7 @@
 {
   "name": "bluejsx",
   "description": "BlueJSX - pure javascript with JSX syntax",
-  "version": "0.1.8",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/bluejsx/BlueJSX.git"
