@@ -9,16 +9,16 @@ export type AdditionalElementProps = {
   watch: (name: string, listener: (value: any) => void) => void;
   _vf: { [key: string]: Function[] & { value?: any; }; };
 } & {
-  [key in PropertyKey]: any;
-}
+    [key in PropertyKey]: any;
+  }
 
 type JSXElement = Element & AdditionalElementProps
 
-type childFunc = (element?: JSXElement)=> void;
+type childFunc = (element?: JSXElement) => void;
 
 export type HTMLTagName = keyof HTMLElementTagNameMap
 export type SVGTagName = keyof SVGElementTagNameMap
-export type JSXChildren = ( JSXElement | string | childFunc | JSXChildren )[]
+export type JSXChildren = (JSXElement | string | childFunc | JSXChildren)[]
 
 export type BlueHTMLAttrs<Element> = Partial<Element> | {
   class?: string
@@ -40,8 +40,8 @@ export type BlueSVGAttrs<Element> = {
 export type JSXElementTags = {
   [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps
 } & {
-  [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
-}
+    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
+  }
 export type JSXElementTagNames = keyof JSXElementTags
 
 /** Type for specific BlueJSX elements. 
@@ -52,7 +52,7 @@ export type JSXElementTagNames = keyof JSXElementTags
  * */
 export type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName]
 
-type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any)=>any) ? ReturnType<T> : Blue.JSX.Element
+type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element
 /**
  * A type for reference object.
  * 
@@ -65,7 +65,7 @@ type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extend
  * }> = {}
  * ```
  */
-export type RefType<M extends {[name: string]: ( JSXElementTagNames | HTMLElement | Function | string )}> = {
+export type RefType<M extends { [name: string]: (JSXElementTagNames | HTMLElement | Function | string) }> = {
   [key in keyof M]?: ResolveComponent<M[key]>
 }
 
@@ -88,19 +88,22 @@ export type RefType<M extends {[name: string]: ( JSXElementTagNames | HTMLElemen
  * }>) => <div />
  * ```
  */
-export type FuncCompParam<Param extends {children?: any[]}> = {
+export type FuncCompParam<Param extends {}> = Param extends { children?: any[] } ? ({
   [key in keyof Param]: key extends 'children' ? ResolveComponent<Param['children'][0]>[] : Param[key]
-}
+}) : ({
+  children?: Blue.JSX.Element[]
+}) & Param
+
 
 declare global {
-  namespace Blue{
+  namespace Blue {
     namespace JSX {
       type Element = (HTMLElement | SVGElement) & AdditionalElementProps
       type IntrinsicElements = {
         [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key]>
       } & {
-        [key in keyof SVGElementTagNameMap]: BlueSVGAttrs<SVGElementTagNameMap[key]>
-      }
+          [key in keyof SVGElementTagNameMap]: BlueSVGAttrs<SVGElementTagNameMap[key]>
+        }
     }
   }
 }
