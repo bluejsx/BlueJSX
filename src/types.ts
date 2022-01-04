@@ -88,7 +88,7 @@ export type RefType<M extends { [name: string]: (JSXElementTagNames | HTMLElemen
  * }>) => <div />
  * ```
  */
-export type FuncCompParam<Param extends {}> = Param extends { children?: any[] } ? ({
+export type FuncCompParam<Param extends {}> = Param extends { children: any[] } ? ({
   [key in keyof Param]: key extends 'children' ? ResolveComponent<Param['children'][0]>[] : Param[key]
 }) : ({
   children?: Blue.JSX.Element[]

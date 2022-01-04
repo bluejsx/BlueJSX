@@ -84,7 +84,7 @@ declare type RefType<M extends {
  * ```
  */
 declare type FuncCompParam<Param extends {}> = Param extends {
-    children?: any[];
+    children: any[];
 } ? ({
     [key in keyof Param]: key extends 'children' ? ResolveComponent<Param['children'][0]>[] : Param[key];
 }) : ({
