@@ -73,38 +73,4 @@ const Blue = {
 
 export default Blue
 export { useAttr, AttrHolder } from './bjsxlib'
-/** Type for specific BlueJSX elements. 
- * Usage: 
- * ```ts
- * const d = <div /> as ElemType<'div'> 
- * ```
- * */
-export type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName]
-
-/**
- * A type for reference object.
- * 
- * usage:
- * ```ts
- * const refs: RefType<{
- *  elem1: 'button'  //element tag name
- *  elem2: typeof FuncComponent  //function component
- *  elem3: ClassComponent //Custom Element (extends HTMLElement)
- * }> = {}
- * ```
- */
-export type RefType<M extends {[name: string]: ( JSXElementTagNames | HTMLElement | Function | string )}> = {
-  [key in keyof M]?: M[key] extends JSXElementTagNames ? ElemType<M[key]> : M[key] extends HTMLElement ? M[key] : M[key] extends ((...args: any)=>any) ? ReturnType<M[key]> : Blue.JSX.Element
-}
-
-/**
- * usage:
- * ```ts
- * const Component = (
- *  {attrA}: FuncCompParam<{attrA?: string}>
- * ) => <div />
- * ```
- */
-export type FuncCompParam<Param> = {
-  children?: [Blue.JSX.Element]
-} & Param
+export { ElemType, RefType, FuncCompParam } from './types'

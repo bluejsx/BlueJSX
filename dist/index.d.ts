@@ -39,6 +39,55 @@ declare type JSXElementTags = {
     [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps;
 };
 declare type JSXElementTagNames = keyof JSXElementTags;
+/** Type for specific BlueJSX elements.
+ * ## Usage:
+ * ```ts
+ * const d = <div /> as ElemType<'div'>
+ * ```
+ * */
+declare type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName];
+declare type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element;
+/**
+ * A type for reference object.
+ *
+ * ## Usage:
+ * ```ts
+ * const refs: RefType<{
+ *  elem1: 'button'  //element tag name
+ *  elem2: typeof FuncComponent  //function component
+ *  elem3: ClassComponent //Custom Element (extends HTMLElement)
+ * }> = {}
+ * ```
+ */
+declare type RefType<M extends {
+    [name: string]: (JSXElementTagNames | HTMLElement | Function | string);
+}> = {
+    [key in keyof M]?: ResolveComponent<M[key]>;
+};
+/**
+ * ## Usage:
+ * ```ts
+ * const Component = ({ attrA, children }: FuncCompParam<{
+ *   attrA?: string
+ * }>) => <div />
+ * ```
+ * ---
+ * For children parameter, you can use abbreviation type, just like in `RefType`:
+ * ```ts
+ * const A = ({ children }: FuncCompParam<{
+ *   children?: typeof Component[]
+ * }>) => <div />
+ *
+ * const B = ({ children }: FuncCompParam<{
+ *   children?: 'div'[]
+ * }>) => <div />
+ * ```
+ */
+declare type FuncCompParam<Param extends {
+    children?: any[];
+}> = {
+    [key in keyof Param]: key extends 'children' ? ResolveComponent<Param['children'][0]>[] : Param[key];
+};
 declare global {
     namespace Blue {
         namespace JSX {
@@ -76,47 +125,11 @@ declare function render<T extends HTMLTagName>(component: T, props: jsxProps, ..
 declare function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
 declare function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
 declare function render<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
-declare const Blue: {
+declare const Blue$1: {
     r: typeof render;
     Fragment: ({ children }: {
         children: Element[];
     }) => Element[];
 };
 
-/** Type for specific BlueJSX elements.
- * Usage:
- * ```ts
- * const d = <div /> as ElemType<'div'>
- * ```
- * */
-declare type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName];
-/**
- * A type for reference object.
- *
- * usage:
- * ```ts
- * const refs: RefType<{
- *  elem1: 'button'  //element tag name
- *  elem2: typeof FuncComponent  //function component
- *  elem3: ClassComponent //Custom Element (extends HTMLElement)
- * }> = {}
- * ```
- */
-declare type RefType<M extends {
-    [name: string]: (JSXElementTagNames | HTMLElement | Function | string);
-}> = {
-    [key in keyof M]?: M[key] extends JSXElementTagNames ? ElemType<M[key]> : M[key] extends HTMLElement ? M[key] : M[key] extends ((...args: any) => any) ? ReturnType<M[key]> : Blue.JSX.Element;
-};
-/**
- * usage:
- * ```ts
- * const Component = (
- *  {attrA}: FuncCompParam<{attrA?: string}>
- * ) => <div />
- * ```
- */
-declare type FuncCompParam<Param> = {
-    children?: [Blue.JSX.Element];
-} & Param;
-
-export { AttrHolder, ElemType, FuncCompParam, RefType, Blue as default, useAttr };
+export { AttrHolder, ElemType, FuncCompParam, RefType, Blue$1 as default, useAttr };

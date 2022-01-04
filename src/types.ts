@@ -1,3 +1,5 @@
+import Blue from ".";
+
 export interface jsxProps {
   [key: string]: any;
 }
@@ -41,6 +43,54 @@ export type JSXElementTags = {
   [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
 }
 export type JSXElementTagNames = keyof JSXElementTags
+
+/** Type for specific BlueJSX elements. 
+ * ## Usage: 
+ * ```ts
+ * const d = <div /> as ElemType<'div'> 
+ * ```
+ * */
+export type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName]
+
+type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any)=>any) ? ReturnType<T> : Blue.JSX.Element
+/**
+ * A type for reference object.
+ * 
+ * ## Usage:
+ * ```ts
+ * const refs: RefType<{
+ *  elem1: 'button'  //element tag name
+ *  elem2: typeof FuncComponent  //function component
+ *  elem3: ClassComponent //Custom Element (extends HTMLElement)
+ * }> = {}
+ * ```
+ */
+export type RefType<M extends {[name: string]: ( JSXElementTagNames | HTMLElement | Function | string )}> = {
+  [key in keyof M]?: ResolveComponent<M[key]>
+}
+
+/**
+ * ## Usage:
+ * ```ts
+ * const Component = ({ attrA, children }: FuncCompParam<{
+ *   attrA?: string
+ * }>) => <div />
+ * ```
+ * ---
+ * For children parameter, you can use abbreviation type, just like in `RefType`:
+ * ```ts
+ * const A = ({ children }: FuncCompParam<{
+ *   children?: typeof Component[]
+ * }>) => <div />
+ * 
+ * const B = ({ children }: FuncCompParam<{
+ *   children?: 'div'[]
+ * }>) => <div />
+ * ```
+ */
+export type FuncCompParam<Param extends {children?: any[]}> = {
+  [key in keyof Param]: key extends 'children' ? ResolveComponent<Param['children'][0]>[] : Param[key]
+}
 
 declare global {
   namespace Blue{
