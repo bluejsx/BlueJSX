@@ -2,7 +2,7 @@ type ValueField<E> = { [Key in keyof E]: Function[] & { value?: E[Key] } }
 /**
  * An object class which can be used with useAttr
  */
-export class AttrHolder<E> {
+export class AttrHolder<E = {}> {
   private _vf: ValueField<E>
   constructor() {
     this._vf = {} as ValueField<E>

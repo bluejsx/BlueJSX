@@ -19,7 +19,6 @@ Code with pure Javascript, components, and JSX!
 - NO virtual DOMs! Just use your familiar HTML DOMs!
 - No Re-rendering by its framework, easier for developers to understand the behavior
 - Less Learning Difficulty than React
-- If you want to change DOM attributes or texts, JUST SET THEM BY YOURSELF!
 - TS support
 
 
