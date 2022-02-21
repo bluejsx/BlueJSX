@@ -40,7 +40,8 @@ elem1.append('hi!')
 
 ## Installation
 
-If you prefer JS over TS, replace `bluejsx/templates/vite-ts` with `bluejsx/templates/vite-js`:
+> You can find more variety of templates. See [here](https://bluejsx.github.io/docs/templates.html) for more info.
+
 ```sh
 npx degit bluejsx/templates/vite-ts my-blue-app
 cd my-blue-app
