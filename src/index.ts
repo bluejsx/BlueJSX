@@ -1,4 +1,4 @@
-import type { HTMLTagName, jsxProps, JSXChildren, AdditionalElementProps, SVGTagName, JSXElementTags, JSXElementTagNames } from './types'
+import type { jsxProps, JSXChildren, JSXElementTagName, ElemType } from './types'
 
 import { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE } from './data'
 
@@ -20,11 +20,11 @@ const processChild = (element: Element, child: any) =>{
 
 
 
-function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
-function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
+
+function render<T extends JSXElementTagName>(component: T, props: jsxProps, ...children: JSXChildren): ElemType<T>;
 function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
 function render<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
-function render (component: HTMLTagName | SVGTagName | Function | any, props: jsxProps, ...children: JSXChildren){
+function render (component: JSXElementTagName | Function | any, props: jsxProps, ...children: JSXChildren){
   props ?? (props = {})
   let isSVG = false
   let element: Element;

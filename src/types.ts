@@ -41,7 +41,7 @@ export type JSXElementTags = {
 } & {
     [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
   }
-export type JSXElementTagNames = keyof JSXElementTags
+export type JSXElementTagName = keyof JSXElementTags
 
 /** Type for specific BlueJSX elements. 
  * ## Usage: 
@@ -49,9 +49,9 @@ export type JSXElementTagNames = keyof JSXElementTags
  * const d = <div /> as ElemType<'div'> 
  * ```
  * */
-export type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName]
+export type ElemType<TagName extends JSXElementTagName> = JSXElementTags[TagName]
 
-type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element
+type ResolveComponent<T> = T extends JSXElementTagName ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element
 /**
  * A type for reference object.
  * 
@@ -64,7 +64,7 @@ type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extend
  * }> = {}
  * ```
  */
-export type RefType<M extends { [name: string]: (JSXElementTagNames | HTMLElement | Function | string) }> = {
+export type RefType<M extends { [name: string]: (JSXElementTagName | HTMLElement | Function | string) }> = {
   [key in keyof M]?: ResolveComponent<M[key]>
 }
 

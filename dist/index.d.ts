@@ -8,8 +8,6 @@ declare type AdditionalElementProps = AttrHolder & {
 };
 declare type JSXElement = Element & AdditionalElementProps;
 declare type childFunc = (element?: JSXElement) => void;
-declare type HTMLTagName = keyof HTMLElementTagNameMap;
-declare type SVGTagName = keyof SVGElementTagNameMap;
 declare type JSXChildren = (JSXElement | string | childFunc | JSXChildren)[];
 declare type BlueHTMLAttrs<Element> = Partial<Element> | {
     class?: string;
@@ -32,15 +30,15 @@ declare type JSXElementTags = {
 } & {
     [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps;
 };
-declare type JSXElementTagNames = keyof JSXElementTags;
+declare type JSXElementTagName = keyof JSXElementTags;
 /** Type for specific BlueJSX elements.
  * ## Usage:
  * ```ts
  * const d = <div /> as ElemType<'div'>
  * ```
  * */
-declare type ElemType<tagName extends JSXElementTagNames> = JSXElementTags[tagName];
-declare type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element;
+declare type ElemType<TagName extends JSXElementTagName> = JSXElementTags[TagName];
+declare type ResolveComponent<T> = T extends JSXElementTagName ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element;
 /**
  * A type for reference object.
  *
@@ -54,7 +52,7 @@ declare type ResolveComponent<T> = T extends JSXElementTagNames ? ElemType<T> : 
  * ```
  */
 declare type RefType<M extends {
-    [name: string]: (JSXElementTagNames | HTMLElement | Function | string);
+    [name: string]: (JSXElementTagName | HTMLElement | Function | string);
 }> = {
     [key in keyof M]?: ResolveComponent<M[key]>;
 };
@@ -113,8 +111,7 @@ declare class AttrHolder<E = {}> {
  */
 declare function useAttr<E, Obj extends AttrHolder<E>, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType> & AttrHolder<E & Record<PropName, AttrType>>;
 
-declare function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
-declare function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
+declare function render<T extends JSXElementTagName>(component: T, props: jsxProps, ...children: JSXChildren): ElemType<T>;
 declare function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
 declare function render<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
 declare const Blue$1: {
