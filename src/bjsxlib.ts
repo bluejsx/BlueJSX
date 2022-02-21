@@ -1,39 +1,35 @@
-
-const valueExists = (value: any): boolean =>{
-  if(value===0) return true
-  return !!value
-}
+type ValueField<E> = { [Key in keyof E]: Function[] & { value?: E[Key] } }
 /**
  * An object class which can be used with useAttr
  */
-export class AttrHolder {
-  _vf: { [key: string]: Function[] & {value?: any} }
-  constructor(){
-    this._vf = {}
+export class AttrHolder<E> {
+  private _vf: ValueField<E>
+  constructor() {
+    this._vf = {} as ValueField<E>
   }
-  watch(name: string, listener: (value: any)=>void): void {
+  watch<Key extends keyof E>(name: Key, listener: (value: E[Key]) => void): void {
     const valueField = this._vf[name]
-    if(!valueField){
+    if (!valueField) {
       this._vf[name] = [listener]
-    }else{
+    } else {
       valueField.push(listener)
-      if(valueExists(valueField.value)) listener(valueField.value)
+      if (valueField.value !== undefined) listener(valueField.value)
     }
   }
 }
 
 Object.defineProperties(Element.prototype, {
   _vf: {
-    value: {} as { [key: string]: Function[] & {value?: any} }
+    value: {} as { [key: string]: Function[] & { value?: any } }
   },
   watch: {
-    value: function(name: string, listener: (value: any)=>void){
+    value: function (name: string, listener: (value: any) => void) {
       const valueField = this._vf[name]
-      if(!valueField){
+      if (!valueField) {
         this._vf[name] = [listener]
-      }else{
+      } else {
         valueField.push(listener)
-        if(valueExists(valueField.value)) listener(valueField.value)
+        if (valueField.value !== undefined) listener(valueField.value)
       }
     }
   }
@@ -45,19 +41,30 @@ Object.defineProperties(Element.prototype, {
  * @param propName Name of the property which you are defining.
  * @param defaultValue Set your default value.
  */
-export function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>
-{
+export function useAttr<
+  E,
+  Obj extends AttrHolder<E>,
+  PropName extends string,
+  AttrType
+>(
+  target: Obj,
+  propName: PropName,
+  defaultValue: AttrType
+): asserts target is Obj & Record<PropName, AttrType> & AttrHolder<E & Record<PropName, AttrType>> {
+  // @ts-ignore
   target._vf[propName] ??= []
+  // @ts-ignore
   const vf = target._vf[propName]
   vf.value = defaultValue
   Object.defineProperty(target, propName, {
-    get(): AttrType{
+    get(): AttrType {
       return vf.value
     },
-    set(value: AttrType){
+    set(value: AttrType) {
       vf.value = value
-      for(let i=vf.length;i--;) vf[i](value)
+      for (let i = vf.length; i--;) vf[i](value)
     }
   });
-  (target as any)[propName] = defaultValue
+  // @ts-ignore
+  target[propName] = defaultValue
 }

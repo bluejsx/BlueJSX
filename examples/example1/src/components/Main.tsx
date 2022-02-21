@@ -1,4 +1,4 @@
-import '@vanillajsx/vjsx'
+import 'bluejsx'
 
 import '../declaration.d'
 

@@ -1,18 +1,12 @@
 interface jsxProps {
     [key: string]: any;
 }
-declare type AdditionalElementProps = {
+declare type AdditionalElementProps<E> = AttrHolder<E> & {
     on: typeof EventTarget.prototype.addEventListener;
-    watch: (name: string, listener: (value: any) => void) => void;
-    _vf: {
-        [key: string]: Function[] & {
-            value?: any;
-        };
-    };
 } & {
     [key in PropertyKey]: any;
 };
-declare type JSXElement = Element & AdditionalElementProps;
+declare type JSXElement = Element & AdditionalElementProps<{}>;
 declare type childFunc = (element?: JSXElement) => void;
 declare type HTMLTagName = keyof HTMLElementTagNameMap;
 declare type SVGTagName = keyof SVGElementTagNameMap;
@@ -34,9 +28,9 @@ declare type BlueSVGAttrs<Element> = {
     [key: string]: any;
 };
 declare type JSXElementTags = {
-    [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps;
+    [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps<{}>;
 } & {
-    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps;
+    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps<{}>;
 };
 declare type JSXElementTagNames = keyof JSXElementTags;
 /** Type for specific BlueJSX elements.
@@ -93,7 +87,7 @@ declare type FuncCompParam<Param extends {}> = Param extends {
 declare global {
     namespace Blue {
         namespace JSX {
-            type Element = (HTMLElement | SVGElement) & AdditionalElementProps;
+            type Element = (HTMLElement | SVGElement) & AdditionalElementProps<{}>;
             type IntrinsicElements = {
                 [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key]>;
             } & {
@@ -106,14 +100,10 @@ declare global {
 /**
  * An object class which can be used with useAttr
  */
-declare class AttrHolder {
-    _vf: {
-        [key: string]: Function[] & {
-            value?: any;
-        };
-    };
+declare class AttrHolder<E> {
+    private _vf;
     constructor();
-    watch(name: string, listener: (value: any) => void): void;
+    watch<Key extends keyof E>(name: Key, listener: (value: E[Key]) => void): void;
 }
 /**
  *
@@ -121,10 +111,10 @@ declare class AttrHolder {
  * @param propName Name of the property which you are defining.
  * @param defaultValue Set your default value.
  */
-declare function useAttr<Obj extends AttrHolder, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType>;
+declare function useAttr<E, Obj extends AttrHolder<E>, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType> & AttrHolder<E & Record<PropName, AttrType>>;
 
-declare function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps;
-declare function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps;
+declare function render<T extends HTMLTagName>(component: T, props: jsxProps, ...children: JSXChildren): HTMLElementTagNameMap[T] & AdditionalElementProps<{}>;
+declare function render<T extends SVGTagName>(component: T, props: jsxProps, ...children: JSXChildren): SVGElementTagNameMap[T] & AdditionalElementProps<{}>;
 declare function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
 declare function render<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
 declare const Blue$1: {

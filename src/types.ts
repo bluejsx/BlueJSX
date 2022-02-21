@@ -1,18 +1,17 @@
 import Blue from ".";
-
+import { AttrHolder } from ".";
 export interface jsxProps {
   [key: string]: any;
 }
 
-export type AdditionalElementProps = {
-  on: typeof EventTarget.prototype.addEventListener;
-  watch: (name: string, listener: (value: any) => void) => void;
-  _vf: { [key: string]: Function[] & { value?: any; }; };
-} & {
+export type AdditionalElementProps<E> = AttrHolder<E>
+  & {
+    on: typeof EventTarget.prototype.addEventListener;
+  } & {
     [key in PropertyKey]: any;
   }
 
-type JSXElement = Element & AdditionalElementProps
+type JSXElement = Element & AdditionalElementProps<{}>
 
 type childFunc = (element?: JSXElement) => void;
 
@@ -38,9 +37,9 @@ export type BlueSVGAttrs<Element> = {
 }
 
 export type JSXElementTags = {
-  [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps
+  [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps<{}>
 } & {
-    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
+    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps<{}>
   }
 export type JSXElementTagNames = keyof JSXElementTags
 
@@ -98,7 +97,7 @@ export type FuncCompParam<Param extends {}> = Param extends { children: any[] } 
 declare global {
   namespace Blue {
     namespace JSX {
-      type Element = (HTMLElement | SVGElement) & AdditionalElementProps
+      type Element = (HTMLElement | SVGElement) & AdditionalElementProps<{}>
       type IntrinsicElements = {
         [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key]>
       } & {

@@ -3,7 +3,7 @@ import { useAttr, AttrHolder, ElemType, RefType, FuncCompParam } from 'bluejsx'
 import { CustomProgress } from './CustomProgress'
 import Header from './Header'
 //takes in attributes as arguments (access to children elements via 'children' attribute)
-const Example = ({ progValue = 0, children = null }: FuncCompParam<{progValue: number}>) => {
+const Example = ({ progValue = 0, children = null }: FuncCompParam<{progValue?: number}>) => {
 
   //declare elements
   //const progress = <CustomProgress max='100' value={progValue}/>
@@ -31,11 +31,12 @@ const Example = ({ progValue = 0, children = null }: FuncCompParam<{progValue: n
   */
   useAttr(self, 'progValue', progValue)
 
+  
   // functionalities
   //when `self.progValue` changed, set `progress.value` to `self.progValue`
   self.watch('progValue', v => {
     progress.value = v
-    percentageText.data = v
+    percentageText.data = v+''
   })
 
   btn.onclick = () => {

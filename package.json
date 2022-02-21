@@ -1,7 +1,7 @@
 {
   "name": "bluejsx",
   "description": "BlueJSX - pure javascript with JSX syntax",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "repository": {
     "type": "git",
     "url": "git://github.com/bluejsx/BlueJSX.git"
@@ -29,12 +29,12 @@
     "frontend"
   ],
   "devDependencies": {
+    "nanoid": ">=3.1.31",
     "normalize-url": ">=4.5.1",
     "sass": "^1.35.1",
     "tsup": "^5.11.10",
     "typescript": "^4.5.4",
-    "vite": "^2.3.7",
-    "nanoid": ">=3.1.31"
+    "vite": "^2.3.7"
   },
   "bugs": {
     "url": "https://github.com/bluejsx/BlueJSX/issues"
