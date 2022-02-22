@@ -109,7 +109,7 @@ declare class AttrHolder<E = {}> {
  * @param propName Name of the property which you are defining.
  * @param defaultValue Set your default value.
  */
-declare function useAttr<E, Obj extends AttrHolder<E>, PropName extends string, AttrType>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & Record<PropName, AttrType> & AttrHolder<E & Record<PropName, AttrType>>;
+declare function useAttr<Obj extends AttrHolder, PropName extends string, AttrType, R extends Record<PropName, AttrType>>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & R & AttrHolder<R>;
 
 declare function render<T extends JSXElementTagName>(component: T, props: jsxProps, ...children: JSXChildren): ElemType<T>;
 declare function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;

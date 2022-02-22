@@ -42,15 +42,15 @@ Object.defineProperties(Element.prototype, {
  * @param defaultValue Set your default value.
  */
 export function useAttr<
-  E,
-  Obj extends AttrHolder<E>,
+  Obj extends AttrHolder,
   PropName extends string,
-  AttrType
+  AttrType,
+  R extends Record<PropName, AttrType>
 >(
   target: Obj,
   propName: PropName,
   defaultValue: AttrType
-): asserts target is Obj & Record<PropName, AttrType> & AttrHolder<E & Record<PropName, AttrType>> {
+): asserts target is Obj & R & AttrHolder<R> {
   // @ts-ignore
   target._vf[propName] ??= []
   // @ts-ignore
