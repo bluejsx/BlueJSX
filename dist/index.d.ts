@@ -8,23 +8,36 @@ declare type AdditionalElementProps = AttrHolder & {
 };
 declare type JSXElement = Element & AdditionalElementProps;
 declare type childFunc = (element?: JSXElement) => void;
-declare type JSXChildren = (JSXElement | string | childFunc | JSXChildren)[];
-declare type BlueHTMLAttrs<Element> = Partial<Element> | {
-    class?: string;
-    children?: JSXChildren;
-    ref?: [object, string];
-    style?: string;
+declare type JSXChild = (JSXElement | string | childFunc | JSXChildren);
+declare type JSXChildren = JSXChild[];
+declare type Modify<Original, Alter> = Omit<Original, keyof Alter> & Alter;
+declare type BlueHTMLAttrs<Element, AdditionalAttr> = Partial<Modify<Modify<Element, {
+    /**
+     * Element's class content attribute as
+     * a set of whitespace-separated tokens.
+     */
+    class: string;
+    /**
+     * A list with two items:
+     *
+     * 1. `refs` object.
+     * 2. name of variable for the element.
+     *
+     * Recommended to use `RefType` or `getRef`
+     *  when creating `refs` object.
+    */
+    ref: [RefType<{}>, string];
+    /**
+     * CSS text
+     */
+    style: string;
+    children: JSXChildren | JSXChild;
+}>, AdditionalAttr> & {
     [key: string]: any;
-};
-declare type BlueSVGAttrs<Element> = {
-    [key in keyof Element]?: string;
-} | {
-    class?: string;
-    children?: JSXChildren;
-    ref?: [object, string];
-    style?: string;
-    [key: string]: any;
-};
+}>;
+declare type BlueSVGAttrs<Element, AdditionalAttr> = BlueHTMLAttrs<{
+    [key in keyof Element]: string;
+}, AdditionalAttr>;
 declare type JSXElementTags = {
     [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps;
 } & {
@@ -38,7 +51,7 @@ declare type JSXElementTagName = keyof JSXElementTags;
  * ```
  * */
 declare type ElemType<TagName extends JSXElementTagName> = JSXElementTags[TagName];
-declare type ResolveComponent<T> = T extends JSXElementTagName ? ElemType<T> : T extends HTMLElement ? T : T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element;
+declare type ResolveComponent<T> = T extends JSXElementTagName ? ElemType<T> : (T extends HTMLElement ? T : (T extends ((...args: any) => any) ? ReturnType<T> : Blue.JSX.Element));
 /**
  * A type for reference object.
  *
@@ -85,11 +98,13 @@ declare type FuncCompParam<Param extends {}> = Param extends {
 declare global {
     namespace Blue {
         namespace JSX {
+            interface AdditionalAttr {
+            }
             type Element = (HTMLElement | SVGElement) & AdditionalElementProps;
             type IntrinsicElements = {
-                [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key]>;
+                [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key], AdditionalAttr>;
             } & {
-                [key in keyof SVGElementTagNameMap]: BlueSVGAttrs<SVGElementTagNameMap[key]>;
+                [key in keyof SVGElementTagNameMap]: BlueSVGAttrs<SVGElementTagNameMap[key], AdditionalAttr>;
             };
         }
     }
@@ -110,6 +125,25 @@ declare class AttrHolder<E = {}> {
  * @param defaultValue Set your default value.
  */
 declare function useAttr<Obj extends AttrHolder, PropName extends string, AttrType, R extends Record<PropName, AttrType>>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & R & AttrHolder<R>;
+/**
+ * A function that returns `RefType` object
+ *
+ * ```ts
+ * // both A and B are equivalent.
+ * // A
+ * const refs: RefType<{
+ *   d1: 'div'
+ * }> = {}
+ *
+ * // B
+ * const refs = getRef<{
+ *   d1: 'div'
+ * }>()
+ * ```
+ */
+declare const getRefs: <M extends {
+    [name: string]: string | Function | HTMLElement;
+}>() => RefType<M>;
 
 declare function render<T extends JSXElementTagName>(component: T, props: jsxProps, ...children: JSXChildren): ElemType<T>;
 declare function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
@@ -121,4 +155,4 @@ declare const Blue$1: {
     }) => Element[];
 };
 
-export { AttrHolder, ElemType, FuncCompParam, RefType, Blue$1 as default, useAttr };
+export { AttrHolder, ElemType, FuncCompParam, RefType, Blue$1 as default, getRefs, useAttr };
