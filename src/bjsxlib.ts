@@ -1,3 +1,4 @@
+import type { JSXElementTagName, RefType } from './types'
 type ValueField<E> = { [Key in keyof E]: Function[] & { value?: E[Key] } }
 /**
  * An object class which can be used with useAttr
@@ -68,3 +69,23 @@ export function useAttr<
   // @ts-ignore
   target[propName] = defaultValue
 }
+
+/**
+ * A function that returns `RefType` object
+ * 
+ * ```ts
+ * // both A and B are equivalent.
+ * // A
+ * const refs: RefType<{
+ *   d1: 'div'
+ * }> = {}
+ * 
+ * // B
+ * const refs = getRef<{
+ *   d1: 'div'
+ * }>()
+ * ```
+ */
+export const getRefs = <M extends {
+  [name: string]: (JSXElementTagName | HTMLElement | Function | string)
+}>(): RefType<M> => ({})
