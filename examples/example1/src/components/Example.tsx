@@ -1,4 +1,4 @@
-import { useAttr, AttrHolder, ElemType, RefType, FuncCompParam } from 'bluejsx'
+import { useAttr, AttrHolder, ElemType, RefType, FuncCompParam, getRefs } from 'bluejsx'
 
 import { CustomProgress } from './CustomProgress'
 import Header from './Header'
@@ -8,15 +8,16 @@ const Example = ({ progValue = 0, children = null }: FuncCompParam<{progValue?: 
   //declare elements
   //const progress = <CustomProgress max='100' value={progValue}/>
   //const btn = <button>click</button>
-  const refs: RefType<{
+  const refs = getRefs<{
     btn: 'button',
     progress: CustomProgress
     //header: typeof Header
-  }> = {}
+  }>()
   const percentageText = new Text(progValue.toString())
   const self = (
     <div class='t3'>
       <button ref={[refs, 'btn']}>click</button>
+      <progress max={100} style={''}></progress>
       <CustomProgress ref={[refs, 'progress']} max='100' value={progValue} />
       %
       {children}
