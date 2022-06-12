@@ -42,8 +42,8 @@ elem1.append('hi!')
 > You can find more variety of templates. See [here](https://bluejsx.github.io/docs/templates.html) for more info.
 
 ```sh
-npx degit bluejsx/templates/vite-ts my-blue-app
-cd my-blue-app
+# in your project folder, run:
+npx degit bluejsx/templates/vite-ts # initialize your TS project
 npm i
 ```
 Congrats! Your environment is ready!
