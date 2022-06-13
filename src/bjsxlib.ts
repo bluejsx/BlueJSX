@@ -37,6 +37,13 @@ Object.defineProperties(Element.prototype, {
 })
 
 /**
+ * Defines a property to the target object.
+ * 
+ * You will be able to listen to the changes to the defined property
+ * by using:
+ * ```ts
+ * target.watch('propName', newValue=>{ ... })
+ * ```
  * 
  * @param target Your BlueJSX element or AttrHolder object.
  * @param propName Name of the property which you are defining.
