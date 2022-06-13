@@ -5,10 +5,8 @@ export interface jsxProps {
 }
 
 export type AdditionalElementProps = AttrHolder & {
-  on: typeof EventTarget.prototype.addEventListener;
-} & {
-    [key in PropertyKey]: any;
-  }
+  [key in PropertyKey]: any;
+}
 
 type JSXElement = Element & AdditionalElementProps
 

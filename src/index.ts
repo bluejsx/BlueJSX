@@ -3,9 +3,6 @@ import type { jsxProps, JSXChildren, JSXElementTagName, ElemType } from './types
 import { SVG_TAG_NAMES, ONLY_VIA_SET_ATTRIBUTE } from './data'
 
 
-Object.defineProperty(EventTarget.prototype, 'on', {
-  value: EventTarget.prototype.addEventListener
-})
 
 
 const processChild = (element: Element, child: any) => {
