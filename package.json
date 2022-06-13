@@ -10,7 +10,6 @@
   "scripts": {
     "dev": "vite examples/example1",
     "build": "tsup src/index.ts --format esm --dts --minify",
-    "build:example": "vite build examples/example1",
     "serve": "vite preview"
   },
   "publishConfig": {
