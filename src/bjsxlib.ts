@@ -78,6 +78,36 @@ export function useAttr<
 }
 
 /**
+ * Defines constant properties to the target object.
+ * 
+ * Useful for defining methods to BlueJSX element
+ * 
+ * Usage:
+ * ```ts
+ * useConstProps(self, {
+ *  init(){
+ *    console.log('hello!')
+ *  }
+ * })
+ * 
+ * self.init()
+ * ```
+ */
+export function useConstProps<
+  Obj extends AttrHolder,
+  Props
+>(
+  obj: Obj,
+  props: Props
+): asserts obj is Obj & Props {
+  const descriptor: PropertyDescriptorMap = {}
+  for (const key in props) {
+    descriptor[key] = { value: props[key] }
+  }
+  Object.defineProperties(obj, descriptor)
+}
+
+/**
  * A function that returns `RefType` object
  * 
  * ```ts
