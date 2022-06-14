@@ -2,8 +2,6 @@ interface jsxProps {
     [key: string]: any;
 }
 declare type AdditionalElementProps = AttrHolder & {
-    on: typeof EventTarget.prototype.addEventListener;
-} & {
     [key in PropertyKey]: any;
 };
 declare type JSXElement = Element & AdditionalElementProps;
@@ -119,12 +117,36 @@ declare class AttrHolder<E = {}> {
     watch<Key extends keyof E>(name: Key, listener: (value: E[Key]) => void): void;
 }
 /**
+ * Defines a property to the target object.
+ *
+ * You will be able to listen to the changes to the defined property
+ * by using:
+ * ```ts
+ * target.watch('propName', newValue=>{ ... })
+ * ```
  *
  * @param target Your BlueJSX element or AttrHolder object.
  * @param propName Name of the property which you are defining.
  * @param defaultValue Set your default value.
  */
 declare function useAttr<Obj extends AttrHolder, PropName extends string, AttrType, R extends Record<PropName, AttrType>>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & R & AttrHolder<R>;
+/**
+ * Defines constant properties to the target object.
+ *
+ * Useful for defining methods to BlueJSX element
+ *
+ * Usage:
+ * ```ts
+ * useConstProps(self, {
+ *  init(){
+ *    console.log('hello!')
+ *  }
+ * })
+ *
+ * self.init()
+ * ```
+ */
+declare function useConstProps<Obj extends AttrHolder, Props>(obj: Obj, props: Props): asserts obj is Obj & Props;
 /**
  * A function that returns `RefType` object
  *
@@ -155,4 +177,4 @@ declare const Blue$1: {
     }) => Element[];
 };
 
-export { AttrHolder, ElemType, FuncCompParam, RefType, Blue$1 as default, getRefs, useAttr };
+export { AttrHolder, ElemType, FuncCompParam, RefType, Blue$1 as default, getRefs, useAttr, useConstProps };
