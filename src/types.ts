@@ -4,11 +4,7 @@ export interface jsxProps {
   [key: string]: any;
 }
 
-export type AdditionalElementProps = AttrHolder & {
-  [key in PropertyKey]: any;
-}
-
-type JSXElement = Element & AdditionalElementProps
+type JSXElement = Element & AttrHolder
 
 type childFunc = (element?: JSXElement) => void;
 
@@ -58,9 +54,9 @@ export type BlueSVGAttrs<Element, AdditionalAttr> = BlueHTMLAttrs<{
 }, AdditionalAttr>
 
 export type JSXElementTags = {
-  [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps
+  [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AttrHolder
 } & {
-    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps
+    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AttrHolder
   }
 export type JSXElementTagName = keyof JSXElementTags
 
@@ -124,7 +120,7 @@ declare global {
   namespace Blue {
     namespace JSX {
       interface AdditionalAttr { }
-      type Element = (HTMLElement | SVGElement) & AdditionalElementProps
+      type Element = (HTMLElement | SVGElement) & AttrHolder
       type IntrinsicElements = {
         [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key], AdditionalAttr>
       } & {
