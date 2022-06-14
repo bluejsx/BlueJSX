@@ -1,10 +1,7 @@
 interface jsxProps {
     [key: string]: any;
 }
-declare type AdditionalElementProps = AttrHolder & {
-    [key in PropertyKey]: any;
-};
-declare type JSXElement = Element & AdditionalElementProps;
+declare type JSXElement = Element & AttrHolder;
 declare type childFunc = (element?: JSXElement) => void;
 declare type JSXChild = (JSXElement | string | childFunc | JSXChildren);
 declare type JSXChildren = JSXChild[];
@@ -37,9 +34,9 @@ declare type BlueSVGAttrs<Element, AdditionalAttr> = BlueHTMLAttrs<{
     [key in keyof Element]: string;
 }, AdditionalAttr>;
 declare type JSXElementTags = {
-    [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AdditionalElementProps;
+    [key in keyof HTMLElementTagNameMap]: HTMLElementTagNameMap[key] & AttrHolder;
 } & {
-    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AdditionalElementProps;
+    [key in keyof SVGElementTagNameMap]: SVGElementTagNameMap[key] & AttrHolder;
 };
 declare type JSXElementTagName = keyof JSXElementTags;
 /** Type for specific BlueJSX elements.
@@ -98,7 +95,7 @@ declare global {
         namespace JSX {
             interface AdditionalAttr {
             }
-            type Element = (HTMLElement | SVGElement) & AdditionalElementProps;
+            type Element = (HTMLElement | SVGElement) & AttrHolder;
             type IntrinsicElements = {
                 [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key], AdditionalAttr>;
             } & {
