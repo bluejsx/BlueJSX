@@ -1,37 +1,48 @@
 import type { JSXElementTagName, RefType } from './types'
-type ValueField<E> = { [Key in keyof E]: Function[] & { value?: E[Key] } }
+type NameField<T> = ((value: T) => void)[] & { value?: T }
+type ValueField<E> = { [Key in keyof E]: NameField<E[Key]> }
+
+/**
+ * value field symbol
+ */
+const vfSymbol = Symbol('BlueValueField')
+
+const watch = <E, Key extends keyof E>(
+  self: AttrHolder<E>,
+  name: Key,
+  listener: (value: E[Key]) => void
+) => {
+  const valueField = self[vfSymbol]
+  const nameField = valueField[name]
+  if (!nameField) {
+    valueField[name] = [listener]
+  } else {
+    nameField.push(listener)
+    if (nameField.value !== undefined) listener(nameField.value)
+  }
+}
 /**
  * An object class which can be used with useAttr
  */
 export class AttrHolder<E = {}> {
-  private _vf: ValueField<E>
-  constructor() {
-    this._vf = {} as ValueField<E>
-  }
-  watch<Key extends keyof E>(name: Key, listener: (value: E[Key]) => void): void {
-    const valueField = this._vf[name]
-    if (!valueField) {
-      this._vf[name] = [listener]
-    } else {
-      valueField.push(listener)
-      if (valueField.value !== undefined) listener(valueField.value)
-    }
+  private [vfSymbol] = {} as ValueField<E>
+  constructor() { }
+  watch<Key extends keyof E>(name: Key, listener: (value: E[Key]) => void) {
+    watch(this, name, listener)
   }
 }
 
 Object.defineProperties(Element.prototype, {
-  _vf: {
-    value: {} as { [key: string]: Function[] & { value?: any } }
+  [vfSymbol]: {
+    value: {}
   },
   watch: {
-    value: function (name: string, listener: (value: any) => void) {
-      const valueField = this._vf[name]
-      if (!valueField) {
-        this._vf[name] = [listener]
-      } else {
-        valueField.push(listener)
-        if (valueField.value !== undefined) listener(valueField.value)
-      }
+    value<E, Key extends keyof E>(
+      this: Element & AttrHolder<E>,
+      name: Key,
+      listener: (value: E[Key]) => void
+    ) {
+      watch(this, name, listener)
     }
   }
 })
@@ -60,17 +71,15 @@ export function useAttr<
   defaultValue: AttrType
 ): asserts target is Obj & R & AttrHolder<R> {
   // @ts-ignore
-  target._vf[propName] ??= []
-  // @ts-ignore
-  const vf = target._vf[propName]
-  vf.value = defaultValue
+  const nameField = (target[vfSymbol][propName] ??= []) as NameField<AttrType>
+  nameField.value = defaultValue
   Object.defineProperty(target, propName, {
     get(): AttrType {
-      return vf.value
+      return nameField.value
     },
     set(value: AttrType) {
-      vf.value = value
-      for (let i = vf.length; i--;) vf[i](value)
+      nameField.value = value
+      for (let i = nameField.length; i--;) nameField[i](value)
     }
   });
   // @ts-ignore
