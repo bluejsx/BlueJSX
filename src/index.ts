@@ -22,7 +22,7 @@ function render<T extends JSXElementTagName>(component: T, props: jsxProps, ...c
 function render<T extends (...args: any) => any>(component: T, props: jsxProps, ...children: JSXChildren): ReturnType<typeof component>;
 function render<T extends Function>(component: T, props: jsxProps, ...children: JSXChildren): T["prototype"];
 function render(component: JSXElementTagName | Function | any, props: jsxProps, ...children: JSXChildren) {
-  props ?? (props = {})
+  props ??= {}
   let isSVG = false
   let element: Element;
 
