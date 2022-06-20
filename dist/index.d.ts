@@ -106,10 +106,14 @@ declare global {
 }
 
 /**
+ * value field symbol
+ */
+declare const vfSymbol: unique symbol;
+/**
  * An object class which can be used with useAttr
  */
 declare class AttrHolder<E = {}> {
-    private _vf;
+    private [vfSymbol];
     constructor();
     watch<Key extends keyof E>(name: Key, listener: (value: E[Key]) => void): void;
 }
