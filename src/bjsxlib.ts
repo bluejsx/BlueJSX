@@ -5,7 +5,7 @@ type ValueField<E> = { [Key in keyof E]: NameField<E[Key]> }
 /**
  * value field symbol
  */
-const vfSymbol = Symbol('BlueValueField')
+const vfSymbol = Symbol()
 
 const watch = <E, Key extends keyof E>(
   self: AttrHolder<E>,
