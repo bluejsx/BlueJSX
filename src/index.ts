@@ -45,17 +45,14 @@ function render(component: JSXElementTagName | Function | any, props: jsxProps, 
   } else {
     throw new Error('Invalid Component')
   }
-  if (props) {
-    for (const key in props) {
-      const prop = props[key]
-      if (key === 'ref') prop[0][prop[1]] = element
-      else if (isSVG || ONLY_VIA_SET_ATTRIBUTE.has(key) || key.includes('-')) {
-        element.setAttribute(key, prop)
-      } else {
-        //let's see if there would be any problem with IDL attr
-        element[key] = prop
-      }
-
+  for (const key in props) {
+    const prop = props[key]
+    if (key === 'ref') prop[0][prop[1]] = element
+    else if (isSVG || ONLY_VIA_SET_ATTRIBUTE.has(key) || key.includes('-')) {
+      element.setAttribute(key, prop)
+    } else {
+      //let's see if there would be any problem with IDL attr
+      element[key] = prop
     }
   }
   processChild(element, children)
