@@ -12,7 +12,9 @@ const processChild = (element: Element, child: any) => {
     for (const v of child) {
       processChild(element, v)
     }
-  } else element.append(child)
+  } else {
+    element.append(child)
+  }
 }
 
 
@@ -47,8 +49,9 @@ function render(component: JSXElementTagName | Function | any, props: jsxProps, 
   }
   for (const key in props) {
     const prop = props[key]
-    if (key === 'ref') prop[0][prop[1]] = element
-    else if (isSVG || ONLY_VIA_SET_ATTRIBUTE.has(key) || key.includes('-')) {
+    if (key === 'ref') {
+      prop[0][prop[1]] = element
+    } else if (isSVG || ONLY_VIA_SET_ATTRIBUTE.has(key) || key.includes('-')) {
       element.setAttribute(key, prop)
     } else {
       //let's see if there would be any problem with IDL attr
