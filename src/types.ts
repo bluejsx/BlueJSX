@@ -109,14 +109,17 @@ export type RefType<M extends { [name: string]: (JSXElementTagName | HTMLElement
  * }>) => <div />
  * ```
  */
-export type FuncCompParam<Param extends {}> = Param extends {
-  children?: Array<infer Child>
-} ? ({
-  [key in keyof Param]: key extends 'children' ? ResolveComponent<Child>[] : Param[key]
-}) : (Param & {
-  children?: Blue.JSX.Element[]
-})
-
+export type FuncCompParam<Param extends {}> = (
+  Param extends {
+    children?: Array<infer Child>
+  } ? ({
+    [key in keyof Param]: key extends 'children' ? ResolveComponent<Child>[] : Param[key]
+  }) : (Param & {
+    children?: Blue.JSX.Element[]
+  })
+) & {
+  [key: string]: any
+}
 
 declare global {
   namespace Blue {
