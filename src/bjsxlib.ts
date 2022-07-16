@@ -85,6 +85,53 @@ export function useAttr<
   // @ts-ignore
   target[propName] = defaultValue
 }
+/**
+ * Defines properties to the target object.
+ * 
+ * Usage:
+ * ```ts
+ * useAttrs(target, {
+ *   attr1: 0
+ *   attr2: 'hello'
+ * })
+ * 
+ * target.attr1 // 0
+ * ```
+ * 
+ * You will be able to listen to changes to the defined property
+ * by using:
+ * ```ts
+ * target.watch('attr1', newValue=>{ ... })
+ * ```
+ * 
+ * @param target Your BlueJSX element or AttrHolder object.
+ * @param attrs Attribute descriptor in the form of `{ attrName: defaultValue }`
+ */
+export function useAttrs<
+  Obj extends AttrHolder,
+  Attrs extends { [Key in keyof Attrs]: Attrs[Key] }
+>(
+  target: Obj,
+  attrs: Attrs
+): asserts target is Obj & Attrs & AttrHolder<Attrs> {
+  const vf = target[vfSymbol] as ValueField<Attrs>
+  for (const propName in attrs) {
+    const defaultValue = attrs[propName]
+    const nameField = (vf[propName] ??= [])
+    nameField.value = defaultValue
+    Object.defineProperty(target, propName, {
+      get() {
+        return nameField.value
+      },
+      set(value) {
+        nameField.value = value
+        for (let i = nameField.length; i--;) nameField[i](value)
+      }
+    });
+    // @ts-ignore
+    target[propName] = defaultValue
+  }
+}
 
 /**
  * Defines constant properties to the target object.
