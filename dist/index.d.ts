@@ -88,7 +88,7 @@ declare type FuncCompParam<Param extends {}> = (Param extends {
     [key in keyof Param]: key extends 'children' ? ResolveComponent<Child>[] : Param[key];
 }) : (Param & {
     children?: Blue.JSX.Element[];
-})) & BaseJSXAttrs;
+})) & Partial<BaseJSXAttrs>;
 declare global {
     namespace Blue {
         namespace JSX {
