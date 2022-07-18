@@ -113,7 +113,7 @@ export type FuncCompParam<Param extends {}> = (
   }) : (Param & {
     children?: Blue.JSX.Element[]
   })
-) & BaseJSXAttrs
+) & Partial<BaseJSXAttrs>
 
 declare global {
   namespace Blue {
