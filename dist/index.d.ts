@@ -6,7 +6,7 @@ declare type childFunc = (element?: JSXElement) => void;
 declare type JSXChild = (JSXElement | string | childFunc | JSXChildren);
 declare type JSXChildren = JSXChild[];
 declare type Modify<Original, Alter> = Omit<Original, keyof Alter> & Alter;
-declare type BlueHTMLAttrs<Element, AdditionalAttr> = Partial<Modify<Modify<Element, {
+declare type BaseJSXAttrs = {
     /**
      * Element's class content attribute as
      * a set of whitespace-separated tokens.
@@ -26,10 +26,9 @@ declare type BlueHTMLAttrs<Element, AdditionalAttr> = Partial<Modify<Modify<Elem
      * CSS text
      */
     style: string;
-    children: JSXChildren | JSXChild;
-}>, AdditionalAttr> & {
     [key: string]: any;
-}>;
+};
+declare type BlueHTMLAttrs<Element, AdditionalAttr> = Partial<Modify<Modify<Element, BaseJSXAttrs>, AdditionalAttr>>;
 declare type BlueSVGAttrs<Element, AdditionalAttr> = BlueHTMLAttrs<{
     [key in keyof Element]: string;
 }, AdditionalAttr>;
@@ -83,13 +82,13 @@ declare type RefType<M extends {
  * }>) => <div />
  * ```
  */
-declare type FuncCompParam<Param extends {}> = Param extends {
-    children: any[];
+declare type FuncCompParam<Param extends {}> = (Param extends {
+    children?: Array<infer Child>;
 } ? ({
-    [key in keyof Param]: key extends 'children' ? ResolveComponent<Param['children'][0]>[] : Param[key];
-}) : ({
+    [key in keyof Param]: key extends 'children' ? ResolveComponent<Child>[] : Param[key];
+}) : (Param & {
     children?: Blue.JSX.Element[];
-}) & Param;
+})) & BaseJSXAttrs;
 declare global {
     namespace Blue {
         namespace JSX {

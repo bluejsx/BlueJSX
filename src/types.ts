@@ -16,37 +16,33 @@ export type JSXChildren = JSXChild[]
 
 type Modify<Original, Alter> = Omit<Original, keyof Alter> & Alter;
 
+type BaseJSXAttrs = {
+  /**
+   * Element's class content attribute as
+   * a set of whitespace-separated tokens.
+   */
+  class: string
+  /**
+   * A list with two items:
+   * 
+   * 1. `refs` object.
+   * 2. name of variable for the element.
+   * 
+   * Recommended to use `RefType` or `getRef`
+   *  when creating `refs` object.
+  */
+  ref: [RefType<{}>, string]
+  /**
+   * CSS text
+   */
+  style: string
+  [key: string]: any
+}
 export type BlueHTMLAttrs<Element, AdditionalAttr> = Partial<
   Modify<
-    Modify<
-      Element,
-      {
-        /**
-         * Element's class content attribute as
-         * a set of whitespace-separated tokens.
-         */
-        class: string
-        /**
-         * A list with two items:
-         * 
-         * 1. `refs` object.
-         * 2. name of variable for the element.
-         * 
-         * Recommended to use `RefType` or `getRef`
-         *  when creating `refs` object.
-        */
-        ref: [RefType<{}>, string]
-        /**
-         * CSS text
-         */
-        style: string
-        children: JSXChildren | JSXChild
-      }
-    >,
+    Modify<Element, BaseJSXAttrs>,
     AdditionalAttr
-  > & {
-    [key: string]: any
-  }
+  >
 >
 
 export type BlueSVGAttrs<Element, AdditionalAttr> = BlueHTMLAttrs<{
@@ -117,9 +113,7 @@ export type FuncCompParam<Param extends {}> = (
   }) : (Param & {
     children?: Blue.JSX.Element[]
   })
-) & {
-  [key: string]: any
-}
+) & BaseJSXAttrs
 
 declare global {
   namespace Blue {
