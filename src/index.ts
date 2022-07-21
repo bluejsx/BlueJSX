@@ -69,5 +69,5 @@ const Blue = {
 }
 
 export default Blue
-export { useAttr, AttrHolder, getRefs, useConstProps } from './bjsxlib'
+export { useAttr, useAttrs, AttrHolder, getRefs, useConstProps } from './bjsxlib'
 export { ElemType, RefType, FuncCompParam } from './types'

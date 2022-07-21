@@ -131,6 +131,31 @@ declare class AttrHolder<E = {}> {
  */
 declare function useAttr<Obj extends AttrHolder, PropName extends string, AttrType, R extends Record<PropName, AttrType>>(target: Obj, propName: PropName, defaultValue: AttrType): asserts target is Obj & R & AttrHolder<R>;
 /**
+ * Defines properties to the target object.
+ *
+ * Usage:
+ * ```ts
+ * useAttrs(target, {
+ *   attr1: 0
+ *   attr2: 'hello'
+ * })
+ *
+ * target.attr1 // 0
+ * ```
+ *
+ * You will be able to listen to changes to the defined property
+ * by using:
+ * ```ts
+ * target.watch('attr1', newValue=>{ ... })
+ * ```
+ *
+ * @param target Your BlueJSX element or AttrHolder object.
+ * @param attrs Attribute descriptor in the form of `{ attrName: defaultValue }`
+ */
+declare function useAttrs<Obj extends AttrHolder, Attrs extends {
+    [Key in keyof Attrs]: Attrs[Key];
+}>(target: Obj, attrs: Attrs): asserts target is Obj & Attrs & AttrHolder<Attrs>;
+/**
  * Defines constant properties to the target object.
  *
  * Useful for defining methods to BlueJSX element
@@ -177,4 +202,4 @@ declare const Blue$1: {
     }) => Element[];
 };
 
-export { AttrHolder, ElemType, FuncCompParam, RefType, Blue$1 as default, getRefs, useAttr, useConstProps };
+export { AttrHolder, ElemType, FuncCompParam, RefType, Blue$1 as default, getRefs, useAttr, useAttrs, useConstProps };
