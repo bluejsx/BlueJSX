@@ -107,7 +107,7 @@ export type RefType<M extends { [name: string]: (JSXElementTagName | HTMLElement
  */
 export type FuncCompParam<Param extends {}> = (
   Param extends {
-    children?: Array<infer Child>
+    children: Array<infer Child>
   } ? ({
     [key in keyof Param]: key extends 'children' ? ResolveComponent<Child>[] : Param[key]
   }) : (Param & {
