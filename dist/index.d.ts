@@ -99,6 +99,8 @@ declare global {
                 [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key], AdditionalAttr>;
             } & {
                 [key in keyof SVGElementTagNameMap]: BlueSVGAttrs<SVGElementTagNameMap[key], AdditionalAttr>;
+            } & {
+                [key: string]: BlueHTMLAttrs<Element, AdditionalAttr>;
             };
         }
     }
