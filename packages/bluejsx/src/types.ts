@@ -1,17 +1,22 @@
-import Blue from ".";
-import { AttrHolder } from ".";
-export interface jsxProps {
+import Blue from "./index.ts";
+import { AttrHolder } from "./index.ts";
+import { childRefsSymbol } from "./bjsxlib.ts";
+
+
+export type JSXProps = {
+  children?: JSXChildren
+} & {
   [key: string]: any;
 }
 
-type JSXElement = Element & AttrHolder
+type JSXElement = Element & AttrHolder & RefsHolder<object>
 
-type childFunc = (element?: JSXElement) => void;
+type ChildFunc = (element?: JSXElement) => void;
 
 export type HTMLTagName = keyof HTMLElementTagNameMap
 export type SVGTagName = keyof SVGElementTagNameMap
 
-type JSXChild = (JSXElement | string | childFunc | JSXChildren)
+type JSXChild = (JSXElement | string | ChildFunc | JSXChildren)
 export type JSXChildren = JSXChild[]
 
 type Modify<Original, Alter> = Omit<Original, keyof Alter> & Alter;
@@ -23,15 +28,21 @@ type BaseJSXAttrs = {
    */
   class: string
   /**
-   * A list with two items:
+   * Variable name of the element to be used.
+   *
+   * Example:
    * 
-   * 1. `refs` object.
-   * 2. name of variable for the element.
+   * ```tsx
+   * const self = <div>
+   *  <progress ref="p1" />
+   *  <FuncComponent ref="comp1" />
+   *  <ClassComponent ref="comp2" />
+   * </div>
    * 
-   * Recommended to use `RefType` or `getRef`
-   *  when creating `refs` object.
-  */
-  ref: [RefType<{}>, string]
+   * const { p1, comp1, comp2 } = self.refs()
+   * ```
+   */
+  ref: string
   /**
    * CSS text
    */
@@ -64,6 +75,42 @@ export type JSXElementTagName = keyof JSXElementTags
  * */
 export type ElemType<TagName extends JSXElementTagName> = JSXElementTags[TagName]
 
+export interface RefsHolder<Refs> {
+  [childRefsSymbol]: Refs,
+  /**
+   * Example:
+   * 
+   * ```tsx
+   * const self = <div>
+   *  <progress ref="p1" />
+   *  <FuncComponent ref="comp1" />
+   *  <ClassComponent ref="comp2" />
+   * </div>
+   * 
+   * const { p1, comp1, comp2 } = self.refs<{
+   *  p1: 'progress'  //element tag name
+   *  comp1: typeof FuncComponent  //function component
+   *  comp2: ClassComponent //Custom Element (extends HTMLElement)
+   * }>()
+   * ```
+   */
+  refs<M extends {
+    [name: string]: (JSXElementTagName | HTMLElement | Function | string)
+  }>(): RefType<M>
+}
+
+export type RefsHolderParent<Refs, Remainder extends (object|string)[]> = 
+  Remainder extends [RefsHolder<infer R>]
+    ? RefsHolder<Refs & R>
+    : Remainder extends [RefsHolder<infer R>, ...(infer Rest)]
+    // @ts-ignore: This is a bug in TypeScript
+      ? RefsHolderParent<Refs & R, Rest>
+      : Remainder extends [infer _, ...(infer Rest)]
+	// @ts-ignore: This is a bug in TypeScript
+	? RefsHolderParent<Refs, Rest>
+	:RefsHolder<Refs>
+
+
 type ResolveComponent<T> = T extends JSXElementTagName ? ElemType<T> : (
   T extends HTMLElement ? T : (
     T extends ((...args: any) => any) ? ReturnType<T>
@@ -83,7 +130,7 @@ type ResolveComponent<T> = T extends JSXElementTagName ? ElemType<T> : (
  * ```
  */
 export type RefType<M extends { [name: string]: (JSXElementTagName | HTMLElement | Function | string) }> = {
-  [key in keyof M]?: ResolveComponent<M[key]>
+  [key in keyof M]: ResolveComponent<M[key]>
 }
 
 /**
@@ -119,7 +166,7 @@ declare global {
   namespace Blue {
     namespace JSX {
       interface AdditionalAttr { }
-      type Element = (HTMLElement | SVGElement) & AttrHolder
+      type Element = (HTMLElement | SVGElement) & AttrHolder & RefsHolder<object>
       type IntrinsicElements = {
         [key in keyof HTMLElementTagNameMap]: BlueHTMLAttrs<HTMLElementTagNameMap[key], AdditionalAttr>
       } & {

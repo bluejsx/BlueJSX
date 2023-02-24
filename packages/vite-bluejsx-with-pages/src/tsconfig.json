@@ -1,13 +1,10 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "lib": ["dom", "esnext"],
-    "target": "ESNext",
+    "lib": ["esnext"],
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "jsx": "preserve",
-    "jsxFactory": "Blue.r",
-    "jsxFragmentFactory": "Blue.Fragment"
+    "resolveJsonModule": true
   }
 }

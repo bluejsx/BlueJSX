@@ -1,4 +1,4 @@
-import type { JSXElementTagName, RefType } from './types'
+import type { JSXElementTagName, RefType } from './types.ts'
 type NameField<T> = ((value: T) => void)[] & { value?: T }
 type ValueField<E> = { [Key in keyof E]: NameField<E[Key]> }
 
@@ -6,6 +6,11 @@ type ValueField<E> = { [Key in keyof E]: NameField<E[Key]> }
  * value field symbol
  */
 const vfSymbol = Symbol()
+
+/**
+ * child refs symbol
+ */
+export const childRefsSymbol = Symbol()
 
 const watch = <E, Key extends keyof E>(
   self: AttrHolder<E>,
@@ -74,7 +79,7 @@ export function useAttr<
   const nameField = (target[vfSymbol][propName] ??= []) as NameField<AttrType>
   nameField.value = defaultValue
   Object.defineProperty(target, propName, {
-    get(): AttrType {
+    get(): AttrType | undefined {
       return nameField.value
     },
     set(value: AttrType) {
@@ -162,23 +167,3 @@ export function useConstProps<
   }
   Object.defineProperties(obj, descriptor)
 }
-
-/**
- * A function that returns `RefType` object
- * 
- * ```ts
- * // both A and B are equivalent.
- * // A
- * const refs: RefType<{
- *   d1: 'div'
- * }> = {}
- * 
- * // B
- * const refs = getRef<{
- *   d1: 'div'
- * }>()
- * ```
- */
-export const getRefs = <M extends {
-  [name: string]: (JSXElementTagName | HTMLElement | Function | string)
-}>(): RefType<M> => ({})

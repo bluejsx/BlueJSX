@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "jsx": "preserve",
+    "jsxFactory": "Blue.r",
+    "jsxFragmentFactory": "Blue.Fragment"
+  }
+}

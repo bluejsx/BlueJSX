@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": ["dom", "esnext", "deno.window"],
+    "jsx": "preserve",
+    "jsxFactory": "Blue.r",
+    "jsxFragmentFactory": "Blue.Fragment"
+  }
+}

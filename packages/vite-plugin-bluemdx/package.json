@@ -1,0 +1,33 @@
+{
+  "name": "@bluejsx/vite-plugin-bluemdx",
+  "version": "1.0.17",
+  "description": "vite plugin for .mdx files with Bluejsx.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify -d lib"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bluejsx/plugins.git"
+  },
+  "files": [
+    "lib/"
+  ],
+  "author": "Momijiichigo",
+  "license": "MIT",
+  "dependencies": {
+    "@bluejsx/vite-plugin-blue-hmr": "latest",
+    "highlight.js": "^11.1.0",
+    "jsx-transform": "^2.4.1",
+    "markdown-it": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
+    "tsup": "^5.4.0",
+    "typescript": "^4.4.4"
+  }
+}

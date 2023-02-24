@@ -1,0 +1,19 @@
+{
+  "name": "vjsx-temp-vite-ts",
+  "version": "1.0.0",
+  "description": "BlueJSX vitejs template",
+  "main": "vite.config.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "bluejsx": "file:../../packages/bluejsx/npm",
+    "vite": "^2.9.15",
+    "vite-with-bluejsx": "latest",
+    "@bluejsx/vite-plugin-blue-hmr": "file:../../packages/vite-plugin-bluejsx-hmr/npm"
+  }
+}
