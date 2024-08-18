@@ -35,6 +35,9 @@ elem1.id = 'elem1'
 elem1.append('hi!')
 ```
 
+#### Experimental HMR
+![b1](https://github.com/user-attachments/assets/e979189e-6422-4a0a-9f57-a1a4b1fc2933)
+[How it's implemented](https://github.com/bluejsx/BlueJSX/discussions/5#discussion-3631908)
 
 
 ## Installation
